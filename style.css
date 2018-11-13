@@ -6,15 +6,17 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 
 :root {
 	--width: 80%;
-	--blue: #0984e3;
-	--red: #e55039;
-	--green: #78e08f;
-	--orange: #fa983a;
-	--yellow: #ffeaa7;
-	--purple: #a29bfe;
-	--pink: #ff7675;
-	--asphalt: #34495e;
-	--grey: #ececec;
+	--blue: #0984e3 !important;
+	--red: #e55039 !important;
+	--green: #1dd1a1 !important;
+	--orange: #fa983a !important;
+	--yellow: #ffeaa7 !important;
+	--purple: #a29bfe !important;
+	--pink: #ef5777 !important;
+	--asphalt: #232524 !important;
+	--grey: #ececec !important;
+
+
   }
 
 .navbar {
@@ -40,14 +42,26 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 	background-color: var(--grey);
 	margin-top: 20px;
 	border-radius: 6px;
-	height: 400px;
+	height: 500px;
 	padding: 10px 0;
 }
 
+.info-container {
+	height: 300px
+}
+
 body.modal-open .page_container{
-    -webkit-filter: blur(4px);
-    -moz-filter: blur(4px);
-    -o-filter: blur(4px);
-    -ms-filter: blur(4px);
-    filter: blur(4px);
+    -webkit-filter: blur(6px);
+    -moz-filter: blur(6px);
+    -o-filter: blur(6px);
+    -ms-filter: blur(6px);
+    filter: blur(6px);
+}
+
+footer {
+	color: white;
+	height: auto;
+	margin-top: 80px;
+	padding: 30px calc((100% - var(--width))/2) !important;
+	background-color: var(--asphalt);
 }

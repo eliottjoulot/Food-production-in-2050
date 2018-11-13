@@ -16,25 +16,26 @@
 </head>
 
 <body>
+<div class="page_container">
 
-        <div class="header">
-                <nav class="navbar navbar-expand-lg navbar-dark">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="src/images/natcap.png" width="45" height="45" class="d-inline-block align-center" alt="" style="margin-right:20px">
-                        Home
-                    </a>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="info.html">Info <span class="sr-only">(current)</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="button">Help</button>
-                    </form>
-                </nav>
-            </div>
+	<div class="header">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand" href="index.html">
+				Home
+			</a>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="info.html">Info</a>
+					</li>
+				</ul>
+			</div>
+			<form class="form-inline">
+				<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target=".bd-example-modal-lg">Help</button>
+			</form>
+
+		</nav>
+	</div>
 
 
 	<div class="content">
@@ -55,6 +56,25 @@
 		</div>
 	</div>
 
+
+
+	<footer>
+		<p>COM-480 Data Visualization, academic project</p>
+		<ul>
+			<li>Eliott Joulot</li>
+			<li>Maxence Petitpierre</li>
+			<li>Kevin Pelletier</li>
+		</ul>
+		
+		<img src="src/images/EPFL.png" alt="NatCap" height="50" style="margin-right: 20px">
+		<img src="src/images/natcap.png" alt="NatCap" height="50">
+	
+	</footer>
+
+
+
+	<script src="help_popup.js"></script>
+	
 	<script src="lib/d3.min.js"></script>
 	<script src="lib/topojson.min.js"></script>
 	<script src="main.js"></script>
@@ -62,7 +82,27 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</div>
 </body>
 
+<!-- Help modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">How to use</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				...
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 </html>
