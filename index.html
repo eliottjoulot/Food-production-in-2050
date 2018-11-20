@@ -102,9 +102,7 @@
 
 						// Full-screen toggle
 						map.addControl(new mapboxgl.FullscreenControl());
-
-						
-						
+	
 						
 					});
 
@@ -117,7 +115,7 @@
 					<div class="form-group" style="margin-bottom: 30px">
 						<label for="exampleFormControlSelect1">Model</label>
 						<select class="form-control" id="exampleFormControlSelect1" onchange="displayInfo()">
-							<option value="SSP_1" selected="selected">SSP 1</option>
+							<option selected value="SSP_1">SSP 1</option>
 							<option value="SSP_2">SSP 2</option>
 							<option value="SSP_3">SSP 3</option>
 							<option value="SSP_4">SSP 4</option>
@@ -248,13 +246,11 @@ function displayInfo() {
 
 	//var selected = "SSP_1"
 	if(selectedSSP != null) {
-		console.log(selectedSSP);
+		//console.log(selectedSSP);
 		document.getElementById(selectedSSP).style.display = "none";
 	}
-	
     selectedSSP = document.getElementById("exampleFormControlSelect1").value;
-    console.log(selectedSSP);
-					//console.log(selected);
+    //console.log(selectedSSP);
 	document.getElementById(selectedSSP).style.display = "inline";
 }
 </script>
