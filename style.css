@@ -5,7 +5,7 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 */
 
 :root {
-	--width: 80%;
+	--width: 90%;
 	--blue: #0984e3 !important;
 	--red: #e55039 !important;
 	--green: #1dd1a1 !important;

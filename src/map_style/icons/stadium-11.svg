@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="a" x1="226" y1="672" x2="226" y2="707.13" gradientTransform="translate(-210 -678)" gradientUnits="userSpaceOnUse">
+      <stop offset="0.01" stop-color="#91dcda"/>
+      <stop offset="1" stop-color="#3398b6"/>
+    </linearGradient>
+  </defs>
+  <title>stadium-11</title>
+  <rect width="32" height="32" fill="none"/>
+  <path d="M8,2A2,2,0,0,0,6,4v8H4a2,2,0,0,0-2,2V28a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V14a2,2,0,0,0-2-2H24V10.55l.76.3a2,2,0,0,0,1.48,0l2.5-1A2,2,0,0,0,30,8V4a2,2,0,0,0-2.74-1.86l-1.76.7-1.76-.7A2,2,0,0,0,23,2H20a2,2,0,0,0-2,2,2,2,0,0,0-2.74-1.86l-1.76.7-1.76-.7A2,2,0,0,0,11,2Z" fill="#fff"/>
+  <path d="M8,4V14H4V28h6V21a1,1,0,0,1,.32-.74,7.12,7.12,0,0,1,4.63-2,6.55,6.55,0,0,1,4.75,2A1,1,0,0,1,20,21v7h6V14H22V4H20v8.47A8.51,8.51,0,0,0,15,11a8.5,8.5,0,0,0-5,1.47V4Zm3,0V8l2.5,1L16,8V4L13.5,5ZM23,4V8l2.5,1L28,8V4L25.5,5ZM15,20.27a5,5,0,0,0-3,1.25V28h6V21.51A4.4,4.4,0,0,0,15,20.27Z" fill="url(#a)"/>
+</svg>

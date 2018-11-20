@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="93" height="21" viewBox="0 0 93 21">
+  <defs>
+    <linearGradient id="a" x1="46.32" y1="1.04" x2="46.71" y2="21.55" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#65d199"/>
+      <stop offset="1" stop-color="#31bca7"/>
+    </linearGradient>
+  </defs>
+  <title>motorway-exit</title>
+  <rect x="1" y="1" width="91" height="19" fill="url(#a)"/>
+  <path d="M91,21H2a2,2,0,0,1-2-2V2A2,2,0,0,1,2,0H91a2,2,0,0,1,2,2V19A2,2,0,0,1,91,21ZM2,19H91V2H2Z" fill="#fff"/>
+</svg>

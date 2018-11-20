@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="a" x1="24" y1="678.5" x2="24" y2="694" gradientTransform="translate(-8 -666)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ec98b7"/>
+      <stop offset="1" stop-color="#eed0dc"/>
+    </linearGradient>
+  </defs>
+  <title>hospital-11</title>
+  <g>
+    <rect width="32" height="32" fill="none"/>
+    <path d="M12,3a2,2,0,0,0-1.41.59l-7,7A2,2,0,0,0,3,12v2a2,2,0,0,0,2,2V27a2,2,0,0,0,2,2H25a2,2,0,0,0,2-2V16a2,2,0,0,0,2-2V12a2,2,0,0,0-.59-1.41l-7-7A2,2,0,0,0,20,3Z" fill="#fff"/>
+    <path d="M12,5,5,12v2H7V27H25V14h2V12L20,5Zm3,8h2v4h4v2H17v4H15V19H11V17h4Z" fill="url(#a)"/>
+  </g>
+</svg>

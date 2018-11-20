@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="63.98" height="32" viewBox="0 0 63.98 32">
+  <defs>
+    <linearGradient id="a" x1="58.02" y1="682.53" x2="58.02" y2="693" gradientTransform="translate(-42 -666)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e3b781"/>
+      <stop offset="1" stop-color="#e9d85e"/>
+    </linearGradient>
+  </defs>
+  <title>school-11</title>
+  <rect width="32" height="32" fill="none"/>
+  <path d="M15.93,3a2,2,0,0,0-1.16.42l-6,4.69A2,2,0,0,0,8,9.69V13a2,2,0,0,0-1.41.59l-3,3A2,2,0,0,0,3,18v9a2,2,0,0,0,2,2H27a2,2,0,0,0,2-2V18a2,2,0,0,0-.59-1.41l-3-3A2,2,0,0,0,24,13V9.69a2,2,0,0,0-.77-1.58l-6-4.69A2,2,0,0,0,15.93,3Z" transform="translate(0)" fill="#fff"/>
+  <path d="M16,5,10,9.69V15H8L5,18v9h6V21a1,1,0,0,1,.32-.74,7.12,7.12,0,0,1,4.63-2,6.55,6.55,0,0,1,4.75,2A1,1,0,0,1,21,21v6h6V18l-3-3H22V9.69Zm0,15.27a5,5,0,0,0-3,1.25V27h6V21.51a4.4,4.4,0,0,0-3-1.23Z" transform="translate(0)" fill="url(#a)"/>
+  <path d="M13,10.08l3-2,3,2V15H13Z" transform="translate(0)" fill="#fff"/>
+  <path d="M15,13V11l1-1,1,1v2h1v1H14V13Z" transform="translate(0)" fill="#b28e76"/>
+  <rect x="31.98" width="32" height="32" fill="none"/>
+</svg>

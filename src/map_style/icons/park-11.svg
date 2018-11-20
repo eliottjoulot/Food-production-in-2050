@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="a" x1="16.18" y1="673" x2="16.18" y2="691.25" gradientTransform="translate(0 -663.5)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#64be81"/>
+      <stop offset="1" stop-color="#a0f8c0"/>
+    </linearGradient>
+  </defs>
+  <title>park-11</title>
+  <rect width="32" height="32" fill="none"/>
+  <g>
+    <path d="M16.26,2a2,2,0,0,0-1.7.82l-12,16.5A2,2,0,0,0,4.18,22.5h.14L1.49,26.92A2,2,0,0,0,3.18,30h26a2,2,0,0,0,1.69-3.08L28,22.5h.14a2,2,0,0,0,1.62-3.18l-12-16.5A2,2,0,0,0,16.26,2Z" transform="translate(-0.18)" fill="#fff"/>
+    <g>
+      <path d="M16.18,4l-12,16.5H8L3.18,28h26l-4.79-7.5h3.79Z" transform="translate(-0.18)" fill="url(#a)"/>
+      <path d="M22.18,20.5l-6,3" transform="translate(-0.18)" fill="none" stroke="#319942" stroke-linejoin="round" stroke-width="2"/>
+      <path d="M10.18,20.5l6,3" transform="translate(-0.18)" fill="none" stroke="#319942" stroke-linejoin="round" stroke-width="2"/>
+      <path d="M20.18,15.5l-4,2" transform="translate(-0.18)" fill="none" stroke="#319942" stroke-linejoin="round" stroke-width="2"/>
+      <path d="M12.18,15.5l4,2" transform="translate(-0.18)" fill="none" stroke="#319942" stroke-linejoin="round" stroke-width="2"/>
+      <path d="M16.18,11.5V28" transform="translate(-0.18)" fill="none" stroke="#319942" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

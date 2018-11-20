@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47.5" height="44" viewBox="0 0 47.5 44">
+  <defs>
+    <linearGradient id="a" x1="23.7" y1="15.16" x2="23.7" y2="35.45" gradientUnits="userSpaceOnUse">
+      <stop offset="0.01" stop-color="#83ceda"/>
+      <stop offset="1" stop-color="#1c9cd3"/>
+    </linearGradient>
+    <linearGradient id="b" x1="23.68" y1="5.79" x2="23.68" y2="14.66" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e95a7c"/>
+      <stop offset="1" stop-color="#f593a8"/>
+    </linearGradient>
+  </defs>
+  <title>interstate</title>
+  <g>
+    <path d="M23.75,38.38h0C2.5,33.52,2.5,19,2.5,7.27V6.59A2,2,0,0,1,5.31,4.76l7.15,3.18A3,3,0,0,0,15,7.88L22.86,4a2,2,0,0,1,1.77,0l8,3.93a3,3,0,0,0,2.57,0l7-3.15A2,2,0,0,1,45,6.6v.66C45,19,45,33.52,23.75,38.38Z" fill="#fff"/>
+    <path d="M42.5,14.77c-.42,8.7-3.74,17.81-18.75,21.25h0C8.74,32.58,5.33,23.47,4.91,14.77" fill="url(#a)"/>
+    <path d="M42.5,13.52V7.27L35,10.47a3,3,0,0,1-2.54-.08L23.75,6,15,10.39a3,3,0,0,1-2.53.09L4.85,7.27v6.25Z" fill="url(#b)"/>
+  </g>
+</svg>

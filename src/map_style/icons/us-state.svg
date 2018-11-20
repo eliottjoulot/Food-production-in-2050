@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="a" x1="23.75" y1="660.81" x2="23.75" y2="689.45" gradientTransform="translate(-7.75 -659.25)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#ebebeb"/>
+    </linearGradient>
+  </defs>
+  <title>us-state</title>
+  <circle cx="16" cy="16" r="15" stroke="#a0a0a0" stroke-miterlimit="10" stroke-width="2" fill="url(#a)"/>
+</svg>
