@@ -23,7 +23,8 @@
 
 	<script type="text/javascript">
 	    function defaultSSP() {
-            document.getElementById("SSP_1").style.display = "inline";;
+            document.getElementById("SSP_1").style.display = "inline";
+			$('.help-modal').modal('show');
         }
         window.onload = defaultSSP;
     </script>
@@ -46,7 +47,7 @@
 				</ul>
 			</div>
 			<form class="form-inline">
-				<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target=".bd-example-modal-lg">Help</button>
+				<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target=".help-modal">Help</button>
 			</form>
 
 		</nav>
@@ -223,7 +224,7 @@
 </body>
 
 <!-- Help modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade help-modal" tabindex="-1" role="dialog" aria-labelledby="helpModal" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
