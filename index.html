@@ -16,7 +16,10 @@
 
 	<!-- Mapbox -->
 	<script src='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
+
 
 </head>
 
@@ -75,11 +78,27 @@
 							clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
 						});
 						
+						// CLusters
 						map.addLayer({
         					id: "clusters",
 							type: "circle",
 							source: "earthquakes"
 						});
+						
+						// Search box
+						map.addControl(new MapboxGeocoder({
+							accessToken: mapboxgl.accessToken
+						}), 'top-left');
+
+						// Add zoom and rotation controls to the map.
+						map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+
+						// Full-screen toggle
+						map.addControl(new mapboxgl.FullscreenControl());
+
+						
+						
+						
 					});
 
 				</script>
