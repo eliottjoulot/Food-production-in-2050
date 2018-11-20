@@ -19,6 +19,16 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 
   }
 
+.anyClass {
+  height:150px;
+  overflow-y: scroll;
+}
+
+.SSP {
+	/*visibility: hidden;*/
+	display:none;
+}
+
 .navbar {
 	height: 70px;
 	margin-bottom: 30px;
@@ -47,7 +57,7 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 }
 
 .info-container {
-	height: 300px
+	height: auto;
 }
 
 body.modal-open .page_container{

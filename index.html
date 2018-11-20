@@ -18,6 +18,13 @@
 	<script src='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
 
+	<script type="text/javascript">
+	    function defaultSSP() {
+            document.getElementById("SSP_1").style.display = "inline";;
+        }
+        window.onload = defaultSSP;
+    </script>
+
 </head>
 
 <body>
@@ -70,12 +77,12 @@
 				<form>
 					<div class="form-group" style="margin-bottom: 30px">
 						<label for="exampleFormControlSelect1">Model</label>
-						<select class="form-control" id="exampleFormControlSelect1">
-							<option>Model 1</option>
-							<option>Model 2</option>
-							<option>Model 3</option>
-							<option>Model 4</option>
-							<option>Model 5</option>
+						<select class="form-control" id="exampleFormControlSelect1" onchange="displayInfo()">
+							<option value="SSP_1" selected="selected">SSP 1</option>
+							<option value="SSP_2">SSP 2</option>
+							<option value="SSP_3">SSP 3</option>
+							<option value="SSP_4">SSP 4</option>
+							<option value="SSP_5">SSP 5</option>
 						</select>
 					</div>
 
@@ -100,8 +107,49 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col container info-container">
-				3 of 3
+			<div class="col container info-container anyClass">				
+				<div class="SSP" id="SSP_1">
+						<h4>
+							SSP1: Sustainability—Taking the green road
+						</h4>
+
+						<p>
+							The world shifts gradually, but pervasively, toward a more sustainable path, emphasizing more inclusive development that respects perceived environmental boundaries. Increasing evidence of and accounting for the social, cultural, and economic costs of environmental degradation and inequality drive this shift. Management of the global commons slowly improves, facilitated by increasingly effective and persistent cooperation and collaboration of local, national, and international organizations and institutions, the private sector, and civil society. Educational and health investments accelerate the demographic transition, leading to a relatively low population. Beginning with current high-income countries, the emphasis on economic growth shifts toward a broader emphasis on human well-being, even at the expense of somewhat slower economic growth over the longer term. Driven by an increasing commitment to achieving development goals, inequality is reduced both across and within countries. Investment in environmental technology and changes in tax structures lead to improved resource efficiency, reducing overall energy and resource use and improving environmental conditions over the longer term. Increased investment, financial incentives and changing perceptions make renewable energy more attractive. Consumption is oriented toward low material growth and lower resource and energy intensity.
+						</p>
+				</div>
+
+				<div class="SSP" id="SSP_2">
+					<h4>
+						SSP2: Middle of the road
+					</h4>
+
+					<p>
+						The world follows a path in which social, economic, and technological trends do not shift markedly from historical patterns. Development and income growth proceeds unevenly, with some countries making relatively good progress while others fall short of expectations. Most economies are politically stable. Globally connected markets function imperfectly. Global and national institutions work toward but make slow progress in achieving sustainable development goals, including improved living conditions and access to education, safe water, and health care. Technological development proceeds apace, but without fundamental breakthroughs.
+					</p>
+				</div>
+
+				<div class="SSP" id="SSP_3">
+					<h4>
+						SSP3: A completer
+					</h4>
+					
+				</div>
+
+				<div class="SSP" id="SSP_4">
+					<h4>
+						SSP4: A completer
+					</h4>
+		
+				</div>
+
+				<div class="SSP" id="SSP_5">
+					<h4>
+						SSP5: A completer
+					</h4>
+					
+				</div>
+
+
 			</div>
 		</div>
 	</div>
@@ -154,6 +202,23 @@
 		</div>
 	</div>
 </div>
+
+<script>
+let selectedSSP = document.getElementById("exampleFormControlSelect1").value;
+function displayInfo() {
+
+	//var selected = "SSP_1"
+	if(selectedSSP != null) {
+		console.log(selectedSSP);
+		document.getElementById(selectedSSP).style.display = "none";
+	}
+	
+    selectedSSP = document.getElementById("exampleFormControlSelect1").value;
+    console.log(selectedSSP);
+					//console.log(selected);
+	document.getElementById(selectedSSP).style.display = "inline";
+}
+</script>
 
 
 
