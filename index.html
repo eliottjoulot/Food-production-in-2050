@@ -59,7 +59,9 @@
 						container: 'map',
 						style: 'mapbox://styles/eliottjoulot/cjopr0ihk1ah82rqsul87x06j',
 						center: [50, 30], // starting position
-						zoom: 1 // starting zoom
+						zoom: 1, // starting zoom
+						maxZoom: 10,
+    					minZoom: 1
 					});
 
 					map.on('load', function () {
@@ -69,7 +71,7 @@
 							// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
 							data: "geotest_10.geojson",
 							cluster: true,
-							clusterMaxZoom: 14, // Max zoom to cluster points on
+							clusterMaxZoom: 10, // Max zoom to cluster points on
 							clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
 						});
 						
