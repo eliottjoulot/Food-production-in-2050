@@ -25,7 +25,7 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 }
 
 .SSP {
-	/*visibility: hidden;*/
+	/*visibility: hidden; */
 	display:none;
 }
 
