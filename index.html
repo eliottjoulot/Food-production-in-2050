@@ -74,7 +74,7 @@
 						style: 'mapbox://styles/eliottjoulot/cjopr0ihk1ah82rqsul87x06j',
 						center: [50, 30], // starting position
 						zoom: 1, // starting zoom
-						maxZoom: 7,
+						maxZoom: 4,
     					minZoom: 1
 					});
 
@@ -83,7 +83,7 @@
 							type: "geojson",
 							// Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
 							// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-							data: "geocal_pos_10filtered.geojson",
+							data: "geo_calories_filtered.geojson",
 							cluster: false,
 							clusterMaxZoom: 6, // Max zoom to cluster points on
 							clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
@@ -100,7 +100,7 @@
 									"interpolate",
 									["linear"],
 									["get", "calories"],
-									20000, 0,
+									22000, 0,
 									35000, 1
 								],
 								// Increase the heatmap color weight weight by zoom level
@@ -132,7 +132,7 @@
 									["linear"],
 									["zoom"],
 									0, 2,
-                					8, 50
+                					8, 30
 								],
 								// Transition from heatmap to circle layer by zoom level
 								/* "heatmap-opacity": [
