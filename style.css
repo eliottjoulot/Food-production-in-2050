@@ -30,10 +30,11 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 }
 
 .navbar {
-	height: 70px;
 	margin-bottom: 30px;
 	padding: 0 calc((100% - var(--width))/2) !important;
 	background-color: var(--asphalt);
+	padding-bottom: 12px !important;
+	padding-top: 12px !important;
 }
 
 .content {
