@@ -68,13 +68,13 @@
 			
 			<div class="col-xs-12 col-sm-10 container map-container" style="padding: 0px 20px 0px 0px; background-color: white">
 				
-				<div id='map' style='width: 100%; height: 100%;border-radius: 10px;'></div>
+				<div id='map' style='width: 100%; height: 100%;border-radius: 10px;border: 1px solid #dedddd;'></div>
 				<script>
 					mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpb3R0am91bG90IiwiYSI6ImNqb3BxbWNsNTA2OWszcWsyZmhyb2RwMmcifQ.8hum7VUmAlj4syS3GZwFLA';
 					var map = new mapboxgl.Map({
 						container: 'map',
-						style: 'mapbox://styles/eliottjoulot/cjopr0ihk1ah82rqsul87x06j',
-						center: [50, 30], // starting position
+						style: 'mapbox://styles/eliottjoulot/cjosk4zex021a2spdbg1k1zkq',
+						center: [15, 30], // starting position
 						zoom: 1, // starting zoom
 						maxZoom: 4,
     					minZoom: 1
@@ -240,7 +240,7 @@
 
 
 			</div>
-			<div class="col col-sm-2 container">
+			<div class="col col-sm-2 container" style="height: auto;">
 				<form>
 					<div class="form-group" style="margin-bottom: 30px">
 						<label for="exampleFormControlSelect1">Model</label>
