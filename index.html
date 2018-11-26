@@ -26,7 +26,7 @@
 
 	<script type="text/javascript">
 	    function defaultSSP() {
-            document.getElementById("SSP_1").style.display = "inline";
+            document.getElementById("SSP1").style.display = "inline";
 			$('.help-modal').modal('show');
         }
         window.onload = defaultSSP;
@@ -81,11 +81,15 @@
 					});
 
 					map.on('load', function () {
+						//let dataSelect = "SSP1";
+						//displayMap()
+						console.log("On load map");
+						
 						map.addSource("earthquakes", {
 							type: "geojson",
 							// Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
 							// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-							data: "geo_calories_filtered.geojson",
+							data: "geo_calories_filtered_SSP1cc.geojson",
 							cluster: false,
 							clusterMaxZoom: 6, // Max zoom to cluster points on
 							clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
@@ -235,6 +239,82 @@
 	
 						
 					});
+					
+					function displayMap()	{
+
+						map.removeLayer("earthquakes-heat");
+						map.removeSource("earthquakes");
+
+						let dataSelect = document.getElementById("exampleFormControlSelect1").value;
+						
+						// SSP1 is the default scenario
+						if(dataSelect == null) {
+							dataSelect = "SSP1";
+						}
+						
+						//map.removeLayer('earthquakes-heat');
+						
+						console.log("Display data : " + dataSelect);
+
+						map.addSource("earthquakes", {
+							type: "geojson",
+							// Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
+							// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+							//data: "geo_calories_filtered_SSP1cc.geojson",
+							data: "geo_calories_filtered_" + dataSelect + "cc.geojson",
+							cluster: false,
+							clusterMaxZoom: 6, // Max zoom to cluster points on
+							clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
+						});
+
+						map.addLayer({
+							"id": "earthquakes-heat",
+							"type": "heatmap",
+							"source": "earthquakes",
+							"maxzoom": 10,
+							"paint": {
+								// Increase the heatmap weight based on frequency and property magnitude
+								"heatmap-weight": [
+									"interpolate",
+									["linear"],
+									["get", "calories"],
+									22000, 0,
+									35000, 1
+								],
+								// Increase the heatmap color weight weight by zoom level
+								// heatmap-intensity is a multiplier on top of heatmap-weight
+								"heatmap-intensity": [
+									"interpolate",
+									["linear"],
+									["zoom"],
+									0, 1,
+									9, 10
+								],
+								// Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+								// Begin color ramp at 0-stop with a 0-transparancy color
+								// to create a blur-like effect.
+								"heatmap-color": [
+									"interpolate",
+									["linear"],
+									["heatmap-density"],
+									0, "rgba(33,102,172,0)",
+									0.2, "rgba(103,169,207,0.5)",
+									0.4, "rgba(209,229,240,0.5)",
+									0.6, "rgba(253,219,199,0.5)",
+									0.8, "rgba(239,138,98,0.5)",
+									1, "rgba(178,24,43,0.5)"
+								],
+								// Adjust the heatmap radius by zoom level
+								"heatmap-radius": [
+									"interpolate",
+									["linear"],
+									["zoom"],
+									0, 2,
+                					8, 30
+								],
+							}
+						});
+					}
 
 				</script>
 
@@ -244,30 +324,30 @@
 				<form>
 					<div class="form-group" style="margin-bottom: 30px">
 						<label for="exampleFormControlSelect1">Model</label>
-						<select class="form-control" id="exampleFormControlSelect1" onchange="displayInfo()">
-							<option selected value="SSP_1">SSP 1</option>
-							<option value="SSP_2">SSP 2</option>
-							<option value="SSP_3">SSP 3</option>
-							<option value="SSP_4">SSP 4</option>
-							<option value="SSP_5">SSP 5</option>
+						<select class="form-control" id="exampleFormControlSelect1" onchange="displayInfo()" onchange="displayMap()">
+							<option selected value="SSP1">SSP 1</option>
+							<option value="SSP2">SSP 2</option>
+							<option value="SSP3">SSP 3</option>
+							<option value="SSP4">SSP 4</option>
+							<option value="SSP5">SSP 5</option>
 						</select>
 					</div>
 
 					<div class="form-check" style="margin-bottom: 10px">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-						<label class="form-check-label" for="exampleRadios1">Option 1</label>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="MR" checked>
+						<label class="form-check-label" for="exampleRadios1">MR</label>
 					</div>
 					<div class="form-check" style="margin-bottom: 10px">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-						<label class="form-check-label" for="exampleRadios2">Option 2</label>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="CC">
+						<label class="form-check-label" for="exampleRadios2">CC</label>
 					</div>
 					<div class="form-check" style="margin-bottom: 10px">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-						<label class="form-check-label" for="exampleRadios2">Option 3</label>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="HE">
+						<label class="form-check-label" for="exampleRadios2">HE</label>
 					</div>
 					<div class="form-check" style="margin-bottom: 10px">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-						<label class="form-check-label" for="exampleRadios2">Option 4</label>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="GS">
+						<label class="form-check-label" for="exampleRadios2">GS</label>
 					</div>
 
 				</form>
@@ -275,7 +355,7 @@
 		</div>
 		<div class="row">
 			<div class="col container info-container anyClass">				
-				<div class="SSP" id="SSP_1">
+				<div class="SSP" id="SSP1">
 						<h4>
 							SSP1: Sustainability—Taking the green road
 						</h4>
@@ -286,7 +366,7 @@
 						</p>
 				</div>
 
-				<div class="SSP" id="SSP_2">
+				<div class="SSP" id="SSP2">
 					<h4>
 						SSP2: Middle of the road
 					</h4>
@@ -296,14 +376,14 @@
 					</p>
 				</div>
 
-				<div class="SSP" id="SSP_3">
+				<div class="SSP" id="SSP3">
 					<h4>
 						SSP3: Regional Rivalry – A Rocky Road
 					</h4>
 						A resurgent nationalism, concerns about competitiveness and security, and regional conflicts push countries to increasingly focus on domestic or, at most, regional issues. Policies shift over time to become increasingly oriented toward national and regional security issues. Countries focus on achieving energy and food security goals within their own regions at the expense of broader-based development. Investments in education and technological development decline. Economic development is slow, consumption is material-intensive, and inequalities persist or worsen over time. Population growth is low in industrialized and high in developing countries. A low international priority for addressing environmental concerns leads to strong environmental degradation in some regions.
 				</div>
 
-				<div class="SSP" id="SSP_4">
+				<div class="SSP" id="SSP4">
 					<h4>
 						SSP4: Inequality – A Road Divided 
 					</h4>
@@ -311,7 +391,7 @@
 		
 				</div>
 
-				<div class="SSP" id="SSP_5">
+				<div class="SSP" id="SSP5">
 					<h4>
 						SSP5: Fossil-fueled Development
 					</h4>
@@ -383,9 +463,15 @@ function displayInfo() {
 		document.getElementById(selectedSSP).style.display = "none";
 	}
     selectedSSP = document.getElementById("exampleFormControlSelect1").value;
+
+    console.log("Display info : " + selectedSSP);
     //console.log(selectedSSP);
 	document.getElementById(selectedSSP).style.display = "inline";
+	displayMap();
+
 }
+
+
 </script>
 
 
