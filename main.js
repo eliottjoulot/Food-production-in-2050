@@ -200,9 +200,11 @@ function mapInteract() {
 function whenDocumentLoaded(action) {
 	if (document.readyState === "loading") {
 		document.addEventListener("DOMContentLoaded", action);
+
 	} else {
 		// `DOMContentLoaded` already fired
 		action();
+
 	}
 }
 
@@ -220,7 +222,9 @@ whenDocumentLoaded(() => {
 	displayInfo();
 	// Allow interactions
 	mapInteract();
-
+	
+	//localStorage.setItem(selectedSSP, "geo_calories_filtered_" + dataSelect + "cc.geojson");
+	
 });
 
 
@@ -257,6 +261,20 @@ function chromeDetect() {
     }
 }
 
+var getLocalStorageSize = function() {
+    var total = 0;
+    for (var x in sessionStorage ) {
+
+        // Value is multiplied by 2 due to data being stored in `utf-16` format, which requires twice the space.
+        var amount = (sessionStorage[x].length * 2) / 1024 / 1024;
+        if (!isNaN(parseFloat(amount))) {
+        	console.log(x + ": " + amount);
+        	total += amount;
+    	}
+    }
+    console.log("Total amount of disk space used (in MB) : ");
+    return total.toFixed(2);
+};
 
 
 
