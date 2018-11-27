@@ -272,8 +272,8 @@ var getLocalStorageSize = function() {
         	total += amount;
     	}
     }
-    console.log("Total amount of disk space used (in MB) : ");
-    return total.toFixed(2);
+    console.log("Total amount of disk space used (in MB) : " + total.toFixed(2) + " over 5MB");
+    //return total.toFixed(2);
 };
 
 
