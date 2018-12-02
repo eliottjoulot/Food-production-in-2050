@@ -61,6 +61,16 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 	height: auto;
 }
 
+
+.textJustify {
+	text-align: justify;
+	text-justify: auto;
+	margin-right: 40px;
+	margin-left: 30px;
+	margin-top: 40px;
+}
+
+
 body.modal-open .page_container{
     -webkit-filter: blur(6px);
     -moz-filter: blur(6px);
