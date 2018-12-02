@@ -68,7 +68,14 @@
 			
 			<div class="col-xs-12 col-sm-10 container map-container" style="padding: 0px 20px 0px 0px; background-color: white">
 				
-				<div id='map' style='width: 100%; height: 100%;border-radius: 10px;border: 1px solid #dedddd;'></div>
+				<div id='map' style='width: 100%; height: 100%;border-radius: 10px;border: 1px solid #dedddd;'>
+				
+					<div style="height: 100%;background-color: #000000b3;position: relative;">
+						<img alt="animated" style="height: 100px;top: 38%;position: sticky;width: 100%;" src="src/svg/earth-spinner.svg">
+						<p style="top: 37%;color: white;text-align: center;position: relative;font-size: larger;font-weight: bold;">Loading...</p>
+					</div>
+					
+				</div>
 				<script>
 					mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpb3R0am91bG90IiwiYSI6ImNqb3BxbWNsNTA2OWszcWsyZmhyb2RwMmcifQ.8hum7VUmAlj4syS3GZwFLA';
 					var map = new mapboxgl.Map({
@@ -76,7 +83,7 @@
 						style: 'mapbox://styles/eliottjoulot/cjosk4zex021a2spdbg1k1zkq',
 						center: [15, 30], // starting position
 						zoom: 1, // starting zoom
-						maxZoom: 4,
+						maxZoom: 14,
     					minZoom: 1
 					});
 
@@ -141,17 +148,17 @@
                 					8, 30
 								],
 								// Transition from heatmap to circle layer by zoom level
-								/* "heatmap-opacity": [
+								"heatmap-opacity": [
 									"interpolate",
 									["linear"],
 									["zoom"],
 									12, 1,
 									14, 0
-								], */
+								],
 							}
 						});
 
-						/* map.addLayer({
+						map.addLayer({
 							"id": "earthquakes-point",
 							"type": "circle",
 							"source": "earthquakes",
@@ -187,7 +194,7 @@
 									26000, "rgba(255,0,0,0.3)"
 								],
 								// Transition from heatmap to circle layer by zoom level
-								/* "circle-opacity": [
+								"circle-opacity": [
 									"interpolate",
 									["linear"],
 									["zoom"],
@@ -195,7 +202,7 @@
 									8, 1
 								]
 							}
-						}); */
+						});
 
 
 
@@ -320,6 +327,7 @@
 
 				</script>
 
+				
 
 			</div>
 			<div class="col col-sm-2 container" style="height: auto;">
@@ -444,8 +452,36 @@
 			</div>
 			<div class="modal-body" w3-include-html="content.html">
 				<h5>We highly recommend to use Chrome for a smoother experience !</h5>
-				<p>
-					 
+				<p id="browser_check">
+					 <script>
+						// Opera 8.0+
+						var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+					
+						// Firefox 1.0+
+						var isFirefox = typeof InstallTrigger !== 'undefined';
+					
+						// Safari 3.0+ "[object HTMLElementConstructor]" 
+						var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+					
+						// Internet Explorer 6-11
+						var isIE = /*@cc_on!@*/false || !!document.documentMode;
+					
+						// Edge 20+
+						var isEdge = !isIE && !!window.StyleMedia;
+					
+						// Chrome 1+
+						var isChrome = !!window.chrome && !!window.chrome.webstore;
+					
+						var output = '<br>Detecting browser used:<hr>';
+						output += 'isFirefox: ' + isFirefox + '<br>';
+						output += 'isChrome: ' + isChrome + '<br>';
+						output += 'isSafari: ' + isSafari + '<br>';
+						output += 'isOpera: ' + isOpera + '<br>';
+						output += 'isIE: ' + isIE + '<br>';
+						output += 'isEdge: ' + isEdge + '<br>';
+
+						document.getElementById("browser_check").innerHTML = output;
+					 </script>
 				</p>
 			</div>
 			<div class="modal-footer">
