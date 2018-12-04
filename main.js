@@ -131,8 +131,6 @@ function mapRemove() {
 function mapRemoveLayerOnly() {
 	let mapId = 'earthquakes';
 	var mapLayer = map.getLayer(mapId);
-	
-	console.log('dkzjdazfnlazkenf : ' + mapLayer);
 
     if(typeof mapLayer !== 'undefined') {
       // Remove map layer & source.
