@@ -146,11 +146,11 @@ function mapSourceAndLayer() {
 					["linear"],
 					["heatmap-density"],
 					0, "rgba(33,102,172,0)",
-					0.2, "rgba(103,169,207,0.5)",
-					0.4, "rgba(209,229,240,0.5)",
-					0.6, "rgba(253,219,199,0.5)",
-					0.8, "rgba(239,138,98,0.5)",
-					1, "rgba(178,24,43,0.5)"
+					0.02, "rgba(103,169,207,0.5)",
+					0.1, "rgba(209,229,240,0.5)",
+					0.14, "rgba(253,219,199,0.5)",
+					0.28, "rgba(239,138,98,0.5)",
+					1, "rgba(78,24,43,0.5)"
 				],
 				// Adjust the heatmap radius by zoom level
 				"heatmap-radius": [
