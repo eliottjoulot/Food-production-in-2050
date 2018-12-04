@@ -70,258 +70,7 @@
 					</div>
 					
 				</div>
-				<script>
-					mapboxgl.accessToken = 'pk.eyJ1IjoiZWxpb3R0am91bG90IiwiYSI6ImNqb3BxbWNsNTA2OWszcWsyZmhyb2RwMmcifQ.8hum7VUmAlj4syS3GZwFLA';
-					var map = new mapboxgl.Map({
-						container: 'map',
-						style: 'mapbox://styles/eliottjoulot/cjosk4zex021a2spdbg1k1zkq',
-						center: [15, 30], // starting position
-						zoom: 1, // starting zoom
-						maxZoom: 14,
-    					minZoom: 1
-					});
-
-					map.on('load', function () {
-						//let dataSelect = "SSP1";
-						//displayMap()
-						console.log("On load map");
-						
-						map.addSource("earthquakes", {
-							type: "geojson",
-							// Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-							// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-							data: "geo_calories_filtered_SSP1cc.geojson",
-							cluster: false,
-							clusterMaxZoom: 6, // Max zoom to cluster points on
-							clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
-						});
-						
-						map.addLayer({
-							"id": "earthquakes-heat",
-							"type": "heatmap",
-							"source": "earthquakes",
-							"maxzoom": 10,
-							"paint": {
-								// Increase the heatmap weight based on frequency and property magnitude
-								"heatmap-weight": [
-									"interpolate",
-									["linear"],
-									["get", "calories"],
-									22000, 0,
-									35000, 1
-								],
-								// Increase the heatmap color weight weight by zoom level
-								// heatmap-intensity is a multiplier on top of heatmap-weight
-								"heatmap-intensity": [
-									"interpolate",
-									["linear"],
-									["zoom"],
-									0, 1,
-									9, 10
-								],
-								// Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-								// Begin color ramp at 0-stop with a 0-transparancy color
-								// to create a blur-like effect.
-								"heatmap-color": [
-									"interpolate",
-									["linear"],
-									["heatmap-density"],
-									0, "rgba(33,102,172,0)",
-									0.2, "rgba(103,169,207,0.5)",
-									0.4, "rgba(209,229,240,0.5)",
-									0.6, "rgba(253,219,199,0.5)",
-									0.8, "rgba(239,138,98,0.5)",
-									1, "rgba(178,24,43,0.5)"
-								],
-								// Adjust the heatmap radius by zoom level
-								"heatmap-radius": [
-									"interpolate",
-									["linear"],
-									["zoom"],
-									0, 2,
-                					8, 30
-								],
-								// Transition from heatmap to circle layer by zoom level
-								"heatmap-opacity": [
-									"interpolate",
-									["linear"],
-									["zoom"],
-									12, 1,
-									14, 0
-								],
-							}
-						});
-
-						map.addLayer({
-							"id": "earthquakes-point",
-							"type": "circle",
-							"source": "earthquakes",
-							"minzoom": 1,
-							"paint": {
-								// Size circle radius by earthquake magnitude and zoom level
-								"circle-radius": [
-									"interpolate",
-									["linear"],
-									["zoom"],
-									1, [
-										"interpolate",
-										["linear"],
-										["get", "calories"],
-										8600, 1,
-										35000, 2
-									],
-									16, [
-										"interpolate",
-										["linear"],
-										["get", "calories"],
-										8600, 5,
-										35000, 20
-									]
-								],
-								// Color circle by earthquake magnitude
-								"circle-color": [
-									"interpolate",
-									["linear"],
-									["get", "calories"],
-									8000, "rgba(0,255,0,0)",
-									18000, "rgba(0,0,255,0.3)",
-									26000, "rgba(255,0,0,0.3)"
-								],
-								// Transition from heatmap to circle layer by zoom level
-								"circle-opacity": [
-									"interpolate",
-									["linear"],
-									["zoom"],
-									7, 0,
-									8, 1
-								]
-							}
-						});
-
-
-
-
-
-
-
-
-						// inspect a cluster on click
-						map.on('click', 'clusters', function (e) {
-							var features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
-							var clusterId = features[0].properties.cluster_id;
-							map.getSource('earthquakes').getClusterExpansionZoom(clusterId, function (err, zoom) {
-								if (err)
-									return;
-
-								map.easeTo({
-									center: features[0].geometry.coordinates,
-									zoom: zoom
-								});
-							});
-						});
-
-						map.on('mouseenter', 'clusters', function () {
-							map.getCanvas().style.cursor = 'pointer';
-						});
-						map.on('mouseleave', 'clusters', function () {
-							map.getCanvas().style.cursor = '';
-						});
-						
-						// Search box
-						map.addControl(new MapboxGeocoder({
-							accessToken: mapboxgl.accessToken
-						}), 'top-left');
-
-						// Add zoom and rotation controls to the map.
-						map.addControl(new mapboxgl.NavigationControl(), 'top-left');
-
-						// Full-screen toggle
-						map.addControl(new mapboxgl.FullscreenControl());
-	
-						
-					});
-					
-					function displayMap()	{
-
-						map.removeLayer("earthquakes-heat");
-						map.removeSource("earthquakes");
-
-						let dataSelect = document.getElementById("exampleFormControlSelect1").value;
-						
-						// SSP1 is the default scenario
-						if(dataSelect == null) {
-							dataSelect = "SSP1";
-						}
-						
-						//map.removeLayer('earthquakes-heat');
-						
-						console.log("Display data : " + dataSelect);
-
-						console.log("Data file : " + "geo_calories_filtered_" + dataSelect + "cc.geojson");
-
-						map.addSource("earthquakes", {
-							type: "geojson",
-							// Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-							// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-							//data: "geo_calories_filtered_SSP1cc.geojson",
-							data: "geo_calories_filtered_" + dataSelect + "cc.geojson",
-							cluster: false,
-							clusterMaxZoom: 6, // Max zoom to cluster points on
-							clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
-						});
-
-						map.addLayer({
-							"id": "earthquakes-heat",
-							"type": "heatmap",
-							"source": "earthquakes",
-							"maxzoom": 10,
-							"paint": {
-								// Increase the heatmap weight based on frequency and property magnitude
-								"heatmap-weight": [
-									"interpolate",
-									["linear"],
-									["get", "calories"],
-									22000, 0,
-									35000, 1
-								],
-								// Increase the heatmap color weight weight by zoom level
-								// heatmap-intensity is a multiplier on top of heatmap-weight
-								"heatmap-intensity": [
-									"interpolate",
-									["linear"],
-									["zoom"],
-									0, 1,
-									9, 10
-								],
-								// Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-								// Begin color ramp at 0-stop with a 0-transparancy color
-								// to create a blur-like effect.
-								"heatmap-color": [
-									"interpolate",
-									["linear"],
-									["heatmap-density"],
-									0, "rgba(33,102,172,0)",
-									0.2, "rgba(103,169,207,0.5)",
-									0.4, "rgba(209,229,240,0.5)",
-									0.6, "rgba(253,219,199,0.5)",
-									0.8, "rgba(239,138,98,0.5)",
-									1, "rgba(178,24,43,0.5)"
-								],
-								// Adjust the heatmap radius by zoom level
-								"heatmap-radius": [
-									"interpolate",
-									["linear"],
-									["zoom"],
-									0, 2,
-                					8, 30
-								],
-							}
-						});
-					}
-
-		
-				</script>
-
+				
 				
 
 			</div>
@@ -339,20 +88,20 @@
 					</div>
 
 					<div class="form-check" style="margin-bottom: 10px">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="cc" checked>
-						<label class="form-check-label" for="exampleRadios1">CC</label>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="calories" checked>
+						<label class="form-check-label" for="exampleRadios1">Calories</label>
 					</div>
 					<div class="form-check" style="margin-bottom: 10px">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="mr">
-						<label class="form-check-label" for="exampleRadios2">MR</label>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="cropland">
+						<label class="form-check-label" for="exampleRadios2">Cropland</label>
 					</div>
 					<div class="form-check" style="margin-bottom: 10px">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="he">
-						<label class="form-check-label" for="exampleRadios2">HE</label>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="temperature">
+						<label class="form-check-label" for="exampleRadios2">Temperature</label>
 					</div>
 					<div class="form-check" style="margin-bottom: 10px">
-						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="gs">
-						<label class="form-check-label" for="exampleRadios2">GS</label>
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="population">
+						<label class="form-check-label" for="exampleRadios2">Population</label>
 					</div>
 
 				</form>

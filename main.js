@@ -224,7 +224,7 @@ whenDocumentLoaded(() => {
 	mapInteract();
 	
 	//localStorage.setItem(selectedSSP, "geo_calories_filtered_" + dataSelect + "cc.geojson");
-	
+	console.log("End onload");
 });
 
 
@@ -279,3 +279,21 @@ var getLocalStorageSize = function() {
 
 
 
+///////////////////////////////////////////////
+
+var checkboxes = document.getElementsByClassName("form-check-input");
+console.log("Checkboxes: " + checkboxes);
+for(let i=0; i<checkboxes.length;i++){
+
+    checkboxes[i].onclick=function(){
+
+      console.log("Current index: "+i);
+
+      if (checkboxes[i].checked) {
+      	console.log( checkboxes[i].value + " has been checked");
+
+      } else {
+      	
+      }
+    };
+}
