@@ -34,6 +34,7 @@ var previousSSP;
 var selectedOPTION;
 var map;
 
+
 function updateSSP() {
 	if (document.getElementById("exampleFormControlSelect1").value == null) {
 		console.log("		default")
@@ -62,6 +63,46 @@ function displayInfo() {
 	previousSSP = selectedSSP;	
 }
 
+function showLoading() {
+	// Adding loading gif
+	console.log('Adding loading gif');
+
+	var loadingDiv = document.createElement("div");
+	loadingDiv.id = "loading";
+	loadingDiv.style.height = "100%";
+	loadingDiv.style.backgroundColor = "#000000b3";
+	loadingDiv.style.position = "relative";
+
+	var loadingImg = document.createElement("img");
+	loadingImg.style.height = "100px";
+	loadingImg.style.width = "100%";
+	loadingImg.style.top = "38%";
+	loadingImg.style.position = "sticky";
+	loadingImg.src = "src/svg/earth-spinner.svg";
+
+	var loadingTxt = document.createElement("p");
+	loadingTxt.style.top = "37%";
+	loadingTxt.style.color = "white";
+	loadingTxt.style.textAlign = "center";
+	loadingTxt.style.position = "relative";
+	loadingTxt.style.fontSize = "larger";
+	loadingTxt.style.fontWeight = "bold";
+	loadingTxt.innerHTML = "Loading...";
+
+	loadingDiv.appendChild(loadingImg);
+	loadingDiv.appendChild(loadingTxt);
+
+	var elem = document.getElementById('map');
+	elem.appendChild(loadingDiv);
+}
+
+function hideLoading() {
+	// Removing loading gif
+	//await sleep(2000);
+	console.log('Removing loading gif');
+	document.getElementById("loading").remove();
+}
+
 
 function mapCreate() {
 	console.log("Create map");
@@ -75,15 +116,11 @@ function mapCreate() {
 		maxZoom: 4,
 		minZoom: 1
 	});
-
-	
-
-	var elem = document.getElementById('map');
-	var loading = '<div class="loading" style="height: 100%;background-color: #000000b3;position: relative;"><img alt="animated" style="height: 100px;top: 38%;position: sticky;width: 100%;" src="src/svg/earth-spinner.svg"><p style="top: 37%;color: white;text-align: center;position: relative;font-size: larger;font-weight: bold;">Loading...</p></div>';
-	elem.innerHTML = elem.innerHTML + loading;
 }
 
 function mapRemove() {
+	
+
 	let mapId = 'earthquakes';
 	var mapLayer = map.getLayer(mapId);
 
@@ -97,6 +134,7 @@ function mapRemove() {
 
 // Display the data on the map as a layer
 function mapSourceAndLayer() {
+	
 	let dataSelect = selectedSSP;
 	console.log("Data file : geo_calories_filtered_" + dataSelect + "cc.geojson");
 
@@ -162,6 +200,9 @@ function mapSourceAndLayer() {
 				],
 			}
 		});
+
+		hideLoading();
+	
 	//});
 }
 
@@ -219,10 +260,13 @@ whenDocumentLoaded(() => {
 	defaultSSP();
 	// Create the map
 	mapCreate();
+	// Sow loading animation
+	showLoading();
 	// Bind the default scenario data to the map and add sourcer/layer
 	map.on('load', function () {
 		mapSourceAndLayer();
 	});
+	
 	// Update the placeholder below the map
 	displayInfo();
 	// Allow interactions
@@ -234,6 +278,9 @@ whenDocumentLoaded(() => {
 
 
 function onSSPchanged() {
+	// Sow loading animation
+	showLoading();
+
 	updateSSP();
 
 	mapRemove();
