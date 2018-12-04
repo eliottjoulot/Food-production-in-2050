@@ -75,8 +75,13 @@ function mapCreate() {
 		maxZoom: 4,
 		minZoom: 1
 	});
-}
 
+	
+
+	var elem = document.getElementById('map');
+	var loading = '<div class="loading" style="height: 100%;background-color: #000000b3;position: relative;"><img alt="animated" style="height: 100px;top: 38%;position: sticky;width: 100%;" src="src/svg/earth-spinner.svg"><p style="top: 37%;color: white;text-align: center;position: relative;font-size: larger;font-weight: bold;">Loading...</p></div>';
+	elem.innerHTML = elem.innerHTML + loading;
+}
 
 function mapRemove() {
 	let mapId = 'earthquakes';
