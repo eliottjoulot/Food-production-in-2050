@@ -17,9 +17,13 @@
 // function mapRemove();
 //		Remove the source and layer of the map 
 //
+// functon mapRemoveLayerOnly():
+//		Only removes the map layer
+//
 // function mapSourceAndLayer();
 //		This function add source and layer to the map according to the data bind
 //		This function is only called in mapData after binding the data file to the map
+//		==> Has been divided into two separates functions : mapSource() and mapLayer()
 //
 // function mapInteract();
 //		Contains all event which the user can interact with the map
@@ -29,25 +33,26 @@
 
 
 // Global variables
-var selectedSSP;// = document.getElementById("exampleFormControlSelect1").value;
-var previousSSP;
-var selectedOPTION;
-var map;
+var selectedSSP;	// The current model selected
+var previousSSP;	// The previous model selected
+var selectedOPTION;	// The scenario choosen
+var map;			// The map where the data is displayed on
 
 
 function updateSSP() {
-	if (document.getElementById("exampleFormControlSelect1").value == null) {
+	if (document.getElementById("FormControlSelect").value == null) {
 		console.log("		default")
 		defaultSSP();
 	}
 	else {
-		selectedSSP = document.getElementById("exampleFormControlSelect1").value;
+		selectedSSP = document.getElementById("FormControlSelect").value;
 	}
 	console.log("updateSSP :" + selectedSSP);
 }
 
 function defaultSSP() {
 	selectedSSP = "SSP1";
+	document.getElementById("exampleRadios1").checked = true;
     //document.getElementById(selectedSSP).style.display = "inline";
 	//$('.help-modal').modal('show');
 }
@@ -99,8 +104,12 @@ function showLoading() {
 function hideLoading() {
 	// Removing loading gif
 	//await sleep(2000);
-	console.log('	Removing loading gif');
-	document.getElementById("loading").remove();
+	// Create the map + add layer takes around 4sec
+	setTimeout(function(){
+		console.log('	Removing loading gif');
+    	document.getElementById("loading").remove();
+	}, 3800);
+	//document.getElementById("loading").remove();
 }
 
 
@@ -186,7 +195,7 @@ function mapLayer(subData) {
 				["linear"],
 				["zoom"],
 				0, 1,
-				9, 10
+				8, 15
 			],
 			// Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
 			// Begin color ramp at 0-stop with a 0-transparancy color
@@ -213,7 +222,7 @@ function mapLayer(subData) {
 		}
 	});
 	
-	hideLoading();
+	//hideLoading();
 
 
 }
@@ -278,7 +287,9 @@ whenDocumentLoaded(() => {
 	map.on('load', function () {
 		mapSource();
 		mapLayer();
+
 	});
+	hideLoading();
 	
 	// Update the placeholder below the map
 	displayInfo();
@@ -298,7 +309,8 @@ function onSSPchanged() {
 
 	mapRemove();
 	mapSource();
-	mapLayer();
+	mapLayer(previousCheck);
+	hideLoading();
 
 	displayInfo();
 	console.log("");
@@ -347,6 +359,7 @@ var getLocalStorageSize = function() {
 
 ///////////////////////////////////////////////
 
+// Below we are looking at the event onclik for a new checkbox and update the layer's map depending on the parameter selected.
 var checkboxes = document.getElementsByClassName("form-check-input");
 var previousCheck = "calories";
 //console.log("Checkboxes: " + checkboxes);
@@ -355,7 +368,7 @@ for(let i=0; i<checkboxes.length;i++){
     checkboxes[i].onclick=function(){
 
       if (checkboxes[i].checked && checkboxes[i].value != previousCheck) {
-      	showLoading();      	
+      	//showLoading();      	
       	console.log("Update the map with : " + checkboxes[i].value);
       	mapRemoveLayerOnly();
       	mapLayer(checkboxes[i].value);
