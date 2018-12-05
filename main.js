@@ -304,14 +304,17 @@ whenDocumentLoaded(() => {
 function onSSPchanged() {
 	// Sow loading animation
 	showLoading();
-
+	// Update the scenario
 	updateSSP();
-
+	// Remove previous map source and layer bind to the previous scenario
 	mapRemove();
+	// Add the new source
 	mapSource();
+	// Keep the same parameter for the previous model (ie : population, temperature, ..)
 	mapLayer(previousCheck);
+	// Hidd the loading gif 
 	hideLoading();
-
+	//Update the info placeholder below the map
 	displayInfo();
 	console.log("");
 }
@@ -339,6 +342,7 @@ function chromeDetect() {
     }
 }
 
+// Use to have the space available to store some data for the session
 var getLocalStorageSize = function() {
     var total = 0;
     for (var x in sessionStorage ) {
@@ -359,22 +363,20 @@ var getLocalStorageSize = function() {
 
 ///////////////////////////////////////////////
 
-// Below we are looking at the event onclik for a new checkbox and update the layer's map depending on the parameter selected.
+// Below we are looking at the event onclik for a checkboxes and update the layer's map depending on the parameter selected.
 var checkboxes = document.getElementsByClassName("form-check-input");
+// By default, the parameter is calories
 var previousCheck = "calories";
-//console.log("Checkboxes: " + checkboxes);
+
 for(let i=0; i<checkboxes.length;i++){
 
     checkboxes[i].onclick=function(){
-
-      if (checkboxes[i].checked && checkboxes[i].value != previousCheck) {
-      	//showLoading();      	
-      	console.log("Update the map with : " + checkboxes[i].value);
-      	mapRemoveLayerOnly();
-      	mapLayer(checkboxes[i].value);
-      	previousCheck = checkboxes[i].value;
-
-
+    	// Do not update if the user clic on the same checkbox
+    	if (checkboxes[i].checked && checkboxes[i].value != previousCheck) {  	
+      		console.log("Update the map with : " + checkboxes[i].value);
+      		mapRemoveLayerOnly();
+      		mapLayer(checkboxes[i].value);
+      		previousCheck = checkboxes[i].value;
       } 
     };
 }
