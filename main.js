@@ -74,24 +74,27 @@ function showLoading() {
 
 	var loadingDiv = document.createElement("div");
 	loadingDiv.id = "loading";
-	loadingDiv.style.height = "100%";
-	loadingDiv.style.backgroundColor = "#000000b3";
-	loadingDiv.style.position = "relative";
+	loadingDiv.className = "divGif";
+	//loadingDiv.style.height = "100%";
+	//loadingDiv.style.backgroundColor = "#000000b3";
+	//loadingDiv.style.position = "relative";
 
 	var loadingImg = document.createElement("img");
-	loadingImg.style.height = "100px";
-	loadingImg.style.width = "100%";
-	loadingImg.style.top = "38%";
-	loadingImg.style.position = "sticky";
+	loadingImg.className = "loadingImg"
+	//loadingImg.style.height = "100px";
+	//loadingImg.style.width = "100%";
+	//loadingImg.style.top = "38%";
+	//loadingImg.style.position = "sticky";
 	loadingImg.src = "src/svg/earth-spinner.svg";
 
 	var loadingTxt = document.createElement("p");
-	loadingTxt.style.top = "37%";
+	loadingTxt.className = "loadingText";
+	/*loadingTxt.style.top = "37%";
 	loadingTxt.style.color = "white";
 	loadingTxt.style.textAlign = "center";
 	loadingTxt.style.position = "relative";
 	loadingTxt.style.fontSize = "larger";
-	loadingTxt.style.fontWeight = "bold";
+	loadingTxt.style.fontWeight = "bold";*/
 	loadingTxt.innerHTML = "Loading...";
 
 	loadingDiv.appendChild(loadingImg);
@@ -102,8 +105,6 @@ function showLoading() {
 }
 
 function hideLoading() {
-	// Removing loading gif
-	//await sleep(2000);
 	// Create the map + add layer takes around 4sec
 	setTimeout(function(){
 		console.log('	Removing loading gif');
@@ -223,7 +224,6 @@ function mapLayer(subData) {
 	});
 	
 	//hideLoading();
-
 
 }
 

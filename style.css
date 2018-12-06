@@ -71,6 +71,31 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 }
 
 
+.divGif {
+	height : 100%;
+	background-color: rgb(0,0,0,0.6);  /*#00000b3*/
+	position : relative;
+	opacity: 50%;
+}
+
+.loadingImg {
+	height : 100px;
+	width : 100%;
+	top : 38%;
+	position : sticky;
+}
+
+.loadingText {
+	top : 37%;
+	color : white;
+	text-align:  center;
+	position : relative;
+	font-size:  larger;
+	font-weight:  bold;
+}
+
+
+
 body.modal-open .page_container{
     -webkit-filter: blur(6px);
     -moz-filter: blur(6px);
