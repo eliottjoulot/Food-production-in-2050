@@ -48,6 +48,9 @@ dataValues.croplandMax = 8602;
 dataValues.populationMin = 0.018170;
 dataValues.populationMax = 172.571062;
 
+dataValues.temperatureMin = 3.588515*10**9;
+dataValues.temperatureMax = 1.978061*10**10;
+
 //dataValues.
 console.log(dataValues);
 
