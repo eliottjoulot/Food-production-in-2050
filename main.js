@@ -38,6 +38,19 @@ var previousSSP;	// The previous model selected
 var selectedOPTION;	// The scenario choosen
 var map;			// The map where the data is displayed on
 
+const dataValues = {};
+dataValues.caloriesMin = 21.997706;
+dataValues.caloriesMax = 23.707261;
+
+dataValues.croplandMin = 239.022749;
+dataValues.croplandMax = 8602;
+
+dataValues.populationMin = 0.018170;
+dataValues.populationMax = 172.571062;
+
+//dataValues.
+console.log(dataValues);
+
 
 function updateSSP() {
 	if (document.getElementById("FormControlSelect").value == null) {
@@ -172,7 +185,8 @@ function mapSource() {
 function mapLayer(subData) {
 
 	if (typeof(subData)==='undefined') subData = "calories";
-	//console.log("subData :" + subData);
+	console.log("	subData :" + subData);
+	console.log("	min and max " + dataValues[subData + "Min"] + " " + dataValues[subData + "Max"]);
 
 	// Add layer
 	map.addLayer({
@@ -186,8 +200,8 @@ function mapLayer(subData) {
 				"interpolate",
 				["linear"],
 				["get", subData],
-				22000, 0,
-				35000, 1
+				dataValues[subData + 'Min'], 0,
+				dataValues[subData + 'Max'], 1
 			],
 			// Increase the heatmap color weight weight by zoom level
 			// heatmap-intensity is a multiplier on top of heatmap-weight
@@ -205,12 +219,15 @@ function mapLayer(subData) {
 				"interpolate",
 				["linear"],
 				["heatmap-density"],
-				0, "rgba(33,102,172,0)",
-				0.02, "rgba(103,169,207,0.5)",
-				0.1, "rgba(209,229,240,0.5)",
-				0.14, "rgba(253,219,199,0.5)",
-				0.28, "rgba(239,138,98,0.5)",
-				1, "rgba(178,24,43,0.5)"
+				0, "rgba(255,228,181,0)",
+				0.2, "rgba(222,184,135,0.5)",
+				0.4, "rgba(255,215,0,0.5)",
+				0.6, "rgba(255,140,0,0.5)",
+				0.7, "rgba(255,140,50,0.5)",
+				0.8, "rgba(178,34,34,0.5)",
+				0.9, "rgba(100,0,0,0.5)",
+				0.95, "rgba(20,170,140,0.5)",
+				1, "rgba(100,0,60,0.5)"
 			],
 			// Adjust the heatmap radius by zoom level
 			"heatmap-radius": [
