@@ -91,26 +91,13 @@ function showLoading() {
 	var loadingDiv = document.createElement("div");
 	loadingDiv.id = "loading";
 	loadingDiv.className = "divGif";
-	//loadingDiv.style.height = "100%";
-	//loadingDiv.style.backgroundColor = "#000000b3";
-	//loadingDiv.style.position = "relative";
 
 	var loadingImg = document.createElement("img");
 	loadingImg.className = "loadingImg"
-	//loadingImg.style.height = "100px";
-	//loadingImg.style.width = "100%";
-	//loadingImg.style.top = "38%";
-	//loadingImg.style.position = "sticky";
 	loadingImg.src = "src/svg/earth-spinner.svg";
 
 	var loadingTxt = document.createElement("p");
 	loadingTxt.className = "loadingText";
-	/*loadingTxt.style.top = "37%";
-	loadingTxt.style.color = "white";
-	loadingTxt.style.textAlign = "center";
-	loadingTxt.style.position = "relative";
-	loadingTxt.style.fontSize = "larger";
-	loadingTxt.style.fontWeight = "bold";*/
 	loadingTxt.innerHTML = "Loading...";
 
 	loadingDiv.appendChild(loadingImg);
@@ -139,12 +126,24 @@ function mapCreate() {
 		style: 'mapbox://styles/eliottjoulot/cjosk4zex021a2spdbg1k1zkq',
 		center: [15, 30], // starting position
 		zoom: 1, // starting zoom
-		maxZoom: 10,
+		maxZoom: 7,
 		minZoom: 1
 	});
 }
 
 function mapRemove() {
+	let clusterId = "clusters";
+    let clusterLayer = map.getLayer(clusterId);
+    if(typeof clusterLayer !== 'undefined') {
+    	map.removeLayer(clusterId);
+    }
+
+    let circleId = "earthquakes-point";
+    let circleLayer = map.getLayer(circleId);
+    if(typeof circleLayer !== 'undefined') {
+    	map.removeLayer(circleId);
+    }
+
 	let mapId = 'earthquakes';
 	let mapLayer = map.getLayer(mapId);
 
@@ -315,7 +314,7 @@ function mapLayer(subData) {
                     dataValues[subData + 'Min'], 1,
                     dataValues[subData + 'Max'], 10
                 ],
-                9, [
+                7, [
                     "interpolate",
                     ["linear"],
                     ["get", subData],
