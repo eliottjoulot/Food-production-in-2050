@@ -125,7 +125,7 @@ function hideLoading() {
 	setTimeout(function(){
 		console.log('	Removing loading gif');
     	document.getElementById("loading").remove();
-	}, 3800);
+	}, 4500);
 	//document.getElementById("loading").remove();
 }
 
@@ -139,14 +139,14 @@ function mapCreate() {
 		style: 'mapbox://styles/eliottjoulot/cjosk4zex021a2spdbg1k1zkq',
 		center: [15, 30], // starting position
 		zoom: 1, // starting zoom
-		maxZoom: 4,
+		maxZoom: 10,
 		minZoom: 1
 	});
 }
 
 function mapRemove() {
 	let mapId = 'earthquakes';
-	var mapLayer = map.getLayer(mapId);
+	let mapLayer = map.getLayer(mapId);
 
     if(typeof mapLayer !== 'undefined') {
       // Remove map layer & source.
@@ -156,12 +156,23 @@ function mapRemove() {
 
 function mapRemoveLayerOnly() {
 	let mapId = 'earthquakes';
-	var mapLayer = map.getLayer(mapId);
-
+	let mapLayer = map.getLayer(mapId);
     if(typeof mapLayer !== 'undefined') {
-      // Remove map layer & source.
-      map.removeLayer(mapId);
+      	map.removeLayer(mapId);
     }
+
+    let clusterId = "clusters";
+    let clusterLayer = map.getLayer(clusterId);
+    if(typeof clusterLayer !== 'undefined') {
+    	map.removeLayer(clusterId);
+    }
+
+    let circleId = "earthquakes-point";
+    let circleLayer = map.getLayer(circleId);
+    if(typeof circleLayer !== 'undefined') {
+    	map.removeLayer(circleId);
+    }
+
 }
 
 
@@ -223,14 +234,14 @@ function mapLayer(subData) {
 				["linear"],
 				["heatmap-density"],
 				0, "rgba(255,228,181,0)",
-				0.2, "rgba(222,184,135,0.5)",
-				0.4, "rgba(255,215,0,0.5)",
-				0.6, "rgba(255,140,0,0.5)",
-				0.7, "rgba(255,140,50,0.5)",
-				0.8, "rgba(178,34,34,0.5)",
-				0.9, "rgba(100,0,0,0.5)",
-				0.95, "rgba(20,170,140,0.5)",
-				1, "rgba(100,0,60,0.5)"
+				0.2, "rgba(140,221,89,0.5)",
+				0.4, "rgba(84,192,49,0.5)",
+				0.6, "rgba(43,162,22,0.5)",
+				//0.7, "rgba(255,140,50,0.5)",
+				0.8, "rgba(31,131,4,0.5)",
+				//0.9, "rgba(11,131,4,0.5)",
+				//0.95, "rgba(20,170,140,0.5)",
+				1, "rgba(20,120,20,0.6)"
 			],
 			// Adjust the heatmap radius by zoom level
 			"heatmap-radius": [
@@ -240,8 +251,98 @@ function mapLayer(subData) {
 				0, 2,
 				8, 30
 			],
+			// Transition from heatmap to circle layer by zoom level
+            "heatmap-opacity": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                5, 1,
+                6, 0
+            ],
 		}
 	});
+	map.addLayer({
+        id: "clusters",
+        type: "circle",
+		source: "earthquakes",
+		minzoom: 1,
+        filter: ["has", "point_count"],
+        paint: {
+            "circle-radius": [
+                "step",
+                ["get", "point_count"],
+                20,
+                100,
+                30,
+                750,
+                40
+            ]
+		},
+		"circle-radius": [
+			"step",
+			["get", "point_count"],
+			20,
+			100,
+			30,
+			750,
+			40
+		],
+		// Transition from heatmap to circle layer by zoom level
+		"circle-opacity": [
+			"interpolate",
+			["linear"],
+			["zoom"],
+			3, 0,
+			5, 1
+		]
+    });
+
+	map.addLayer({
+        "id": "earthquakes-point",
+        "type": "circle",
+        "source": "earthquakes",
+        "minzoom": 1,
+        "paint": {
+            // Size circle radius by earthquake magnitude and zoom level
+            "circle-radius": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                5, [
+                    "interpolate",
+                    ["linear"],
+                    ["get", subData],
+                    dataValues[subData + 'Min'], 1,
+                    dataValues[subData + 'Max'], 10
+                ],
+                9, [
+                    "interpolate",
+                    ["linear"],
+                    ["get", subData],
+					dataValues[subData + 'Min'], 5,
+                    dataValues[subData + 'Max'], 50
+                ]
+			],
+
+			// Color circle by earthquake magnitude
+            "circle-color": [
+                "interpolate",
+                ["linear"],
+                ["get", subData],
+                dataValues[subData + 'Min'], "rgba(250,250,250,0.1)",
+                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, "rgba(43,162,22,0.7)",
+                dataValues[subData + 'Max'], "rgba(0,180,0,0.7)"
+            ],
+            // Transition from heatmap to circle layer by zoom level
+            "circle-opacity": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                5, 0,
+                7, 1
+            ]
+        }
+    });
 	
 	//hideLoading();
 
