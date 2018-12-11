@@ -319,7 +319,7 @@ function mapLayer(subData) {
                     ["linear"],
                     ["get", subData],
 					dataValues[subData + 'Min'], 5,
-                    dataValues[subData + 'Max'], 50
+                    dataValues[subData + 'Max'], 30
                 ]
 			],
 
