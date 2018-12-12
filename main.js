@@ -84,6 +84,16 @@ function displayInfo() {
 	previousSSP = selectedSSP;	
 }
 
+function showLegend() {
+	// Adding legend to the map
+
+	var legendDiv = document.createElement("div");
+	legendDiv.className = "legend";
+
+	var elem = document.getElementById('map');
+	elem.appendChild(legendDiv);
+}
+
 function showLoading() {
 	// Adding loading gif
 	console.log('	Adding loading gif');
@@ -401,6 +411,8 @@ whenDocumentLoaded(() => {
 	defaultSSP();
 	// Create the map
 	mapCreate();
+	// Sow legend
+	showLegend();
 	// Sow loading animation
 	showLoading();
 	// Bind the default scenario data to the map and add sourcer/layer

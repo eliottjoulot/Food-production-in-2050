@@ -94,6 +94,14 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 	font-weight:  bold;
 }
 
+.legend {
+	background-color: #f5f8f9a3;
+    height: 80px;
+    width: 274px;
+    position: absolute;
+    right: 0px;
+    bottom: 20px;
+}
 
 
 body.modal-open .page_container{
