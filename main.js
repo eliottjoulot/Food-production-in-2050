@@ -38,6 +38,14 @@ var previousSSP;	// The previous model selected
 var selectedOPTION;	// The scenario choosen
 var map;			// The map where the data is displayed on
 
+// Colors
+var color1 = "rgba(255,228,181,0)";
+var color2 = "rgba(140,221,89,0.5)";
+var color3 = "rgba(84,192,49,0.5)";
+var color4 = "rgba(43,162,22,0.5)";
+var color5 = "rgba(31,131,4,0.5)";
+var color6 = "rgba(20,120,20,0.6)";
+
 const dataValues = {};
 dataValues.caloriesMin = 21.997706;
 dataValues.caloriesMax = 23.707261;
@@ -89,6 +97,33 @@ function showLegend() {
 
 	var legendDiv = document.createElement("div");
 	legendDiv.className = "legend";
+
+	var legendTitle = document.createElement("div");
+	legendTitle.className = "legend_title";
+	legendTitle.innerHTML = "Legend:";
+
+	var legendColors = document.createElement("div");
+	legendColors.className = "legend_colors";
+	legendColors.style.backgroundImage = "linear-gradient(to right,"+color1+","+color2+","+color3+","+color4+","+color5+","+color6+")";
+
+	var legendValues = document.createElement("div");
+	legendValues.className = "legend_values";
+
+	var legendValueMin = document.createElement("div");
+	legendValueMin.id = "legend_value_min";
+	legendValueMin.innerHTML = "Min";
+
+	var legendValueMax = document.createElement("div");
+	legendValueMax.id = "legend_value_max";
+	legendValueMax.innerHTML = "Max";
+
+	legendValues.appendChild(legendValueMin);
+	legendValues.appendChild(legendValueMax);
+
+
+	legendDiv.appendChild(legendTitle);
+	legendDiv.appendChild(legendColors);
+	legendDiv.appendChild(legendValues);
 
 	var elem = document.getElementById('map');
 	elem.appendChild(legendDiv);
@@ -210,6 +245,12 @@ function mapLayer(subData) {
 	if (typeof(subData)==='undefined') subData = "calories";
 	console.log("	subData :" + subData);
 	console.log("	min and max " + dataValues[subData + "Min"] + " " + dataValues[subData + "Max"]);
+
+	var minValue = document.getElementById('legend_value_min');
+	minValue.innerHTML = dataValues[subData + "Min"];
+
+	var maxValue = document.getElementById('legend_value_max');
+	maxValue.innerHTML = dataValues[subData + "Max"];
 
 	// Add layer
 	map.addLayer({

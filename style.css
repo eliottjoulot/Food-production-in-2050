@@ -60,6 +60,14 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 
 .info-container {
 	height: auto;
+	text-align: justify;
+	padding: 20px !important;
+	margin-top: 30px;
+}
+
+.info-container p{
+    font-size: 0.9em;
+    margin-top: 20px;
 }
 
 
@@ -101,9 +109,40 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
     width: 274px;
     position: absolute;
     right: 0px;
-    bottom: 20px;
+	bottom: 20px;
 }
 
+.legend_title {
+	color: #3b3d3e;
+    padding: 10px 10px 0px 10px;
+    font-size: 12px;
+	font-weight: 500;
+}
+
+.legend_colors{
+	width: auto;
+	height: 20px; 
+	margin: 4px 10px 0px 10px;
+}
+
+.legend_values{
+	width: 100%; 
+	overflow: hidden;
+}
+
+#legend_value_min{
+	float: left;
+    margin-left: 10px;
+}
+
+#legend_value_max{
+	float: right;
+    margin-right: 10px;
+}
+
+.form-check{
+	font-size: 0.9rem;
+}
 
 body.modal-open .page_container{
     -webkit-filter: blur(6px);
