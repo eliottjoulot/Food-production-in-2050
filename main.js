@@ -459,19 +459,20 @@ function onSSPchanged() {
 
 
 function chromeDetect() { 
-	// Detect if the user is using chrome;
+	// Detect if the user is using chrome
+	/*
     if(navigator.userAgent.indexOf("Chrome") != -1 )
     {
         alert('Chrome');
     }
     // If not, we advise him to use it
-    else {
+    else {*/
     	// Only display the pop up once for the session
     	if(sessionStorage.getItem("popup") != "seen") {
     		$('.help-modal').modal('show');
     		sessionStorage.setItem("popup","seen");
     	}
-    }
+    //}
 }
 
 // Use to have the space available to store some data for the session
