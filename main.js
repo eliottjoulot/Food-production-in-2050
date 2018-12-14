@@ -47,17 +47,18 @@ var color5 = "rgba(31,131,4,0.5)";
 var color6 = "rgba(20,120,20,0.6)";
 
 const dataValues = {};
-dataValues.caloriesMin = 21.997706;
-dataValues.caloriesMax = 23.707261;
+	
+dataValues.caloriesMin = 4.31*10**11;
+dataValues.caloriesMax = 1.11*10**14;
 
-dataValues.croplandMin = 239.022749;
-dataValues.croplandMax = 8602;
+dataValues.croplandMin = 90;
+dataValues.croplandMax = 8600;
 
-dataValues.populationMin = 0.018170;
-dataValues.populationMax = 172.571062;
+dataValues.populationMin = 40;
+dataValues.populationMax = 145*10**6;
 
-dataValues.temperatureMin = 3.588515*10**9;
-dataValues.temperatureMax = 1.978061*10**10;
+dataValues.temperatureMin = 3.60*10**9;
+dataValues.temperatureMax = 2*10**10;
 
 //dataValues.
 console.log(dataValues);
@@ -247,10 +248,26 @@ function mapLayer(subData) {
 	console.log("	min and max " + dataValues[subData + "Min"] + " " + dataValues[subData + "Max"]);
 
 	var minValue = document.getElementById('legend_value_min');
-	minValue.innerHTML = dataValues[subData + "Min"];
-
+	//minValue.innerHTML = dataValues[subData + "Min"];
 	var maxValue = document.getElementById('legend_value_max');
-	maxValue.innerHTML = dataValues[subData + "Max"];
+	//maxValue.innerHTML = dataValues[subData + "Max"];
+	//str.match(/.{1,3}/g)
+
+	if(subData == "calories" || subData == "temperature") {
+		minValue.innerHTML = Math.round(dataValues[subData + "Min"]/10**3);
+		maxValue.innerHTML = Math.round(dataValues[subData + "Max"]/10**3);
+	}
+	else if(subData == "cropland") {
+		minValue.innerHTML = 0;
+		maxValue.innerHTML = 100;
+	}
+	else if(subData == "population") {
+		minValue.innerHTML = dataValues[subData + "Min"];
+		maxValue.innerHTML = dataValues[subData + "Max"];
+	}
+
+	minValue.innerHTML = minValue.innerHTML.match(/[\s\S]{1,3}/g);
+	maxValue.innerHTML = maxValue.innerHTML.match(/[\s\S]{1,3}/g);
 
 	// Add layer
 	map.addLayer({
