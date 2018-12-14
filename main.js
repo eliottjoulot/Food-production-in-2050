@@ -38,7 +38,7 @@ var previousSSP;	// The previous model selected
 var selectedOPTION;	// The scenario choosen
 var map;			// The map where the data is displayed on
 
-// Colors
+// Colors used for data
 var color1 = "rgba(255,228,181,0)";
 var color2 = "rgba(140,221,89,0.5)";
 var color3 = "rgba(84,192,49,0.5)";
@@ -234,7 +234,7 @@ function mapSource() {
 		// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
 		data: "final" + dataSelect + ".geojson",
 		//data: "geo_calories_filtered_" + dataSelect + "cc.geojson",
-		cluster: false,
+		cluster: false, // Set to true to sow clusters of points
 		clusterMaxZoom: 6, // Max zoom to cluster points on
 		clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
 	});
@@ -346,7 +346,6 @@ function mapLayer(subData) {
 			5, 1
 		]
     });
-
 	map.addLayer({
         "id": "earthquakes-point",
         "type": "circle",
@@ -394,30 +393,90 @@ function mapLayer(subData) {
         }
     });
 	
-	//hideLoading();
+	// When a click event occurs on a feature in the places layer, open a popup at the
+    // location of the feature, with description HTML from its properties.
+    map.on('click', 'earthquakes', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+    });
 
 }
 
 function mapInteract() {
-	// inspect a cluster on click
-	map.on('click', 'clusters', function (e) {
-		var features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] });
-		var clusterId = features[0].properties.cluster_id;
-		map.getSource('earthquakes').getClusterExpansionZoom(clusterId, function (err, zoom) {
-			if (err)
-				return;
 
-			map.easeTo({
-				center: features[0].geometry.coordinates,
-				zoom: zoom
-			});
-		});
-	});
+	// When a click event occurs on a feature in the points layer, open a popup at the
+    // location of the point, with description HTML from its properties.
+    map.on('click', 'earthquakes-point', function (e) {
+		var coordinates = e.features[0].geometry.coordinates.slice();
+		
+		console.log("Point selcted: ", e.features[0].properties);
 
-	map.on('mouseenter', 'clusters', function () {
+		// Retrieving information of the selected point
+		var calories = e.features[0].properties.calories;
+		var cropland = e.features[0].properties.cropland;
+		var population = e.features[0].properties.population;
+		var temperature = e.features[0].properties.temperature;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+		}
+
+		var checkboxes = document.getElementsByClassName("form-check-input");
+		for(let i=0; i<checkboxes.length;i++){
+			if (checkboxes[i].checked) {
+				subitem = checkboxes[i].value;
+			}
+		}
+		
+		// Creating the popup
+		var popupDiv = document.createElement("div");
+		popupDiv.className = "popup";
+		
+		var popupTitle = document.createElement("h5");
+		popupTitle.className = "popup_title";
+		popupTitle.innerHTML = subitem;
+
+		var popupValue = document.createElement("p");
+		popupValue.className = "popup_value";
+		if (subitem == "calories"){
+			popupValue.innerHTML = calories;}
+		else if (subitem == "cropland"){
+			popupValue.innerHTML = cropland;}
+		else if (subitem == "temperature"){
+			popupValue.innerHTML = temperature;}
+		else if (subitem == "population"){
+			popupValue.innerHTML = population;}
+
+		popupDiv.appendChild(popupTitle);
+		popupDiv.appendChild(popupValue);
+		
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(popupDiv.innerHTML)
+            .addTo(map);
+    });
+
+
+	map.on('mouseenter', 'earthquakes-point', function () {
 		map.getCanvas().style.cursor = 'pointer';
 	});
-	map.on('mouseleave', 'clusters', function () {
+	map.on('mouseleave', 'earthquakes-point', function () {
 		map.getCanvas().style.cursor = '';
 	});
 	
