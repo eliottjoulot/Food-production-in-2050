@@ -55,7 +55,7 @@ dataValues.croplandMin = 90;
 dataValues.croplandMax = 8600;
 
 dataValues.populationMin = 40;
-dataValues.populationMax = 145*10**6;
+dataValues.populationMax = 145*10**3;
 
 dataValues.temperatureMin = 3.60*10**9;
 dataValues.temperatureMax = 2*10**10;
@@ -254,20 +254,17 @@ function mapLayer(subData) {
 	//str.match(/.{1,3}/g)
 
 	if(subData == "calories" || subData == "temperature") {
-		minValue.innerHTML = Math.round(dataValues[subData + "Min"]/10**3);
-		maxValue.innerHTML = Math.round(dataValues[subData + "Max"]/10**3);
+		minValue.innerHTML = Math.round(dataValues[subData + "Min"]/10**3).toLocaleString();
+		maxValue.innerHTML = Math.round(dataValues[subData + "Max"]/10**3).toLocaleString();
 	}
 	else if(subData == "cropland") {
 		minValue.innerHTML = 0;
 		maxValue.innerHTML = 100;
 	}
 	else if(subData == "population") {
-		minValue.innerHTML = dataValues[subData + "Min"];
-		maxValue.innerHTML = dataValues[subData + "Max"];
+		minValue.innerHTML = dataValues[subData + "Min"].toLocaleString();
+		maxValue.innerHTML = dataValues[subData + "Max"].toLocaleString();
 	}
-
-	minValue.innerHTML = minValue.innerHTML.match(/[\s\S]{1,3}/g);
-	maxValue.innerHTML = maxValue.innerHTML.match(/[\s\S]{1,3}/g);
 
 	// Add layer
 	map.addLayer({
@@ -304,10 +301,7 @@ function mapLayer(subData) {
 				0.2, "rgba(140,221,89,0.5)",
 				0.4, "rgba(84,192,49,0.5)",
 				0.6, "rgba(43,162,22,0.5)",
-				//0.7, "rgba(255,140,50,0.5)",
 				0.8, "rgba(31,131,4,0.5)",
-				//0.9, "rgba(11,131,4,0.5)",
-				//0.95, "rgba(20,170,140,0.5)",
 				1, "rgba(20,120,20,0.6)"
 			],
 			// Adjust the heatmap radius by zoom level
@@ -396,8 +390,8 @@ function mapLayer(subData) {
                 ["linear"],
                 ["get", subData],
                 dataValues[subData + 'Min'], "rgba(250,250,250,0.1)",
-                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, "rgba(43,162,22,0.7)",
-                dataValues[subData + 'Max'], "rgba(0,180,0,0.7)"
+                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, "rgba(43,162,22,0.5)",
+                dataValues[subData + 'Max'], "rgba(20,120,20,0.6)"
             ],
             // Transition from heatmap to circle layer by zoom level
             "circle-opacity": [
@@ -438,13 +432,16 @@ function mapInteract() {
     map.on('click', 'earthquakes-point', function (e) {
 		var coordinates = e.features[0].geometry.coordinates.slice();
 		
-		console.log("Point selcted: ", e.features[0].properties);
+		console.log("Point selected: ", e.features[0].properties);
 
 		// Retrieving information of the selected point
-		var calories = e.features[0].properties.calories;
-		var cropland = e.features[0].properties.cropland;
-		var population = e.features[0].properties.population;
-		var temperature = e.features[0].properties.temperature;
+		var calories =  Math.round(e.features[0].properties.calories/10**3);
+		calories = calories.toLocaleString();
+		var cropland = Math.round(100*e.features[0].properties.cropland/dataValues.croplandMax);
+		var population = Math.round(e.features[0].properties.population);
+		population = population.toLocaleString();
+		var temperature = Math.round(e.features[0].properties.temperature/10**3);
+		temperature = temperature.toLocaleString();
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
