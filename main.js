@@ -515,12 +515,11 @@ function whenDocumentLoaded(action) {
 	} else {
 		// `DOMContentLoaded` already fired
 		action();
-
 	}
 }
 
 whenDocumentLoaded(() => {
-	chromeDetect();
+	sessionStorageDetect();
 	// Set the SSP scenario to the default one.
 	defaultSSP();
 	// Create the map
@@ -573,20 +572,21 @@ function onSSPchanged() {
 
 
 function chromeDetect() { 
-	// Detect if the user is using chrome
-	/*
-    if(navigator.userAgent.indexOf("Chrome") != -1 )
-    {
-        alert('Chrome');
-    }
-    // If not, we advise him to use it
-    else {*/
-    	// Only display the pop up once for the session
-    	if(sessionStorage.getItem("popup") != "seen") {
-    		$('.help-modal').modal('show');
-    		sessionStorage.setItem("popup","seen");
-    	}
-    //}
+	//Detect if the user is using chrome
+	if(navigator.userAgent.indexOf("Chrome") != -1 ) {
+		//alert('Chrome');
+		modalFooter = document.getElementsByClassName("modal-footer");
+		//modalFooter.style.visibility = "hidden";
+		modalFooter.parentNode.removeChild(modalFooter);
+	}
+}
+
+function sessionStorageDetect() { 
+	//Detect if the user has already been on the page before
+	if(sessionStorage.getItem("popup") != "seen") {
+		$('.help-modal').modal('show');
+		sessionStorage.setItem("popup","seen");
+	}
 }
 
 // Use to have the space available to store some data for the session
