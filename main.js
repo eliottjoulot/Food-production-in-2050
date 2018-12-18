@@ -648,9 +648,9 @@ for(let i=0; i<checkboxes.length;i++){
 const MARGIN = { top: 5, right: 5, bottom: 5, left: 5 };
 
 
-const SCENARIO = [{'x': 40,  'y': 60,'name' :'Sustainability', 'ssp':'SSP1'},
-				  {'x': 120, 'y': 60,'name' :'Inequality',	   'ssp':'SSP4'},
-				  {'x': 200, 'y': 60,'name' :'Fossil',         'ssp':'SSP5'}];
+const SCENARIO = [{'x': 40,  'y': 65,'name' :'Sustainability', 'ssp':'SSP1'},
+				  {'x': 125, 'y': 65,'name' :'Inequality',	   'ssp':'SSP4'},
+				  {'x': 210, 'y': 65,'name' :'Fossil',         'ssp':'SSP5'}];
 				 
 //const SCENARIO_COLORS = ["rgb(51, 204, 51)","rgb(255, 153, 51)","rgb(230, 46, 0)"];
 
@@ -733,9 +733,9 @@ class ScatterPlot {
 	//line              
 	svg.append("line")
 	  .attr("x1", 0)
-	  .attr("y1", 125)
+	  .attr("y1", 105)
 	  .attr("x2", 320)
-	  .attr("y2", 125)          
+	  .attr("y2", 105)          
 	  .attr("stroke-width", 1)
 	  .attr("stroke", "black")
 	  .attr("marker-end", "url(#triangle)");
@@ -753,7 +753,7 @@ class ScatterPlot {
 
 	svg.append('text')
 			.attr('x',0)
-			.attr('y',140)
+			.attr('y',120)
 			.attr('class','legend_txt')
 			.text('Socio-economic challenge for adapation');
 
