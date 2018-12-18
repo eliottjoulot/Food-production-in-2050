@@ -60,6 +60,14 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
     padding-right: 0px;
 }
 
+.container label {
+	font-weight: bold;
+}
+
+.container .form-check label{
+	font-weight: 500;
+}
+
 .card.container{
 	padding: 0px;
 }
