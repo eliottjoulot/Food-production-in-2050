@@ -232,14 +232,11 @@ function mapRemoveLayerOnly() {
 function mapSource() {
 	
 	let dataSelect = selectedSSP;
-	console.log("datat sjeebf " + selectedSSP); //
-	//console.log("Data file : geo_calories_filtered_" + dataSelect + "cc.geojson");
+	console.log('New scenario: ' + selectedSSP);
 
 	// Add source
 	map.addSource("earthquakes", {
 		type: "geojson",
-		// Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
-		// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
 		//data: "final" + dataSelect + ".geojson",
 		data: "_" + dataSelect.toLowerCase() + ".geojson",
 		cluster: false, // Set to true to sow clusters of points
@@ -550,27 +547,36 @@ whenDocumentLoaded(() => {
 	console.log("End onload");
 
 	const plot = new ScatterPlot('svg_menu', SCENARIO);
-	//d3.select("#SSP1").style('opacity',1);
+
+	let c = d3.select('circle').style('opacity','1');
+		
 });
 
 
 function onSSPchanged(i) {
-
-	// Sow loading animation
-	showLoading();
-	// Update the scenario
 	updateSSP(i);
-	// Remove previous map source and layer bind to the previous scenario
-	mapRemove();
-	// Add the new source
-	mapSource();
-	// Keep the same parameter for the previous model (ie : population, temperature, ..)
-	mapLayer(previousCheck);
-	// Hidd the loading gif 
-	hideLoading();
-	//Update the info placeholder below the map
-	displayInfo();
-	console.log("");
+	if(previousSSP != selectedSSP) {
+		// Sow loading animation
+		showLoading();
+		// Update the scenario
+
+		// Remove previous map source and layer bind to the previous scenario
+		mapRemove();
+		// Add the new source
+		mapSource();
+		// Keep the same parameter for the previous model (ie : population, temperature, ..)
+		mapLayer(previousCheck);
+		// Hidd the loading gif 
+		hideLoading();
+		//Update the info placeholder below the map
+		displayInfo();
+	}
+	else {
+		console.log('Do not update, clic on same circle');
+	}
+
+	previousSSP = selectedSSP;
+	//console.log("");
 }
 
 
