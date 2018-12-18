@@ -232,7 +232,7 @@ function mapRemoveLayerOnly() {
 function mapSource() {
 	
 	let dataSelect = selectedSSP;
-	console.log("datat sjeebf " + selectedSSP);
+	console.log("datat sjeebf " + selectedSSP); //
 	//console.log("Data file : geo_calories_filtered_" + dataSelect + "cc.geojson");
 
 	// Add source
