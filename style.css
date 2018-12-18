@@ -170,7 +170,7 @@ POPUP
 }
 
 .stop-left1 {
-	stop-color: #FCE54E;  /* Indigo */
+	stop-color: #F8D147;  /* Indigo */
 }
 .stop-right1 {
 	stop-color: #F5B13F;  /* Teal */
@@ -212,14 +212,14 @@ POPUP
 	text-anchor: middle;
 	alignment-baseline: middle;
 	dominant-baseline: middle;
-	font-size: 14px;
+	font-size: 13px;
 	cursor: pointer;
+	font-weight: bold;
 }
 
 .legend_txt {
 	color: black;
 	text-align: center;
-	font-weight: bold;
 	font-size: 14px;
 }
 

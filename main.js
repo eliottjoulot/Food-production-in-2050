@@ -648,9 +648,9 @@ for(let i=0; i<checkboxes.length;i++){
 const MARGIN = { top: 5, right: 5, bottom: 5, left: 5 };
 
 
-const SCENARIO = [{'x': 50,  'y': 60,'name' :'Sustainability', 'ssp':'SSP1'},
-				  {'x': 150, 'y': 60,'name' :'Inequality',	   'ssp':'SSP4'},
-				  {'x': 250, 'y': 60,'name' :'Fossil',         'ssp':'SSP5'}];
+const SCENARIO = [{'x': 40,  'y': 60,'name' :'Sustainability', 'ssp':'SSP1'},
+				  {'x': 120, 'y': 60,'name' :'Inequality',	   'ssp':'SSP4'},
+				  {'x': 200, 'y': 60,'name' :'Fossil',         'ssp':'SSP5'}];
 				 
 //const SCENARIO_COLORS = ["rgb(51, 204, 51)","rgb(255, 153, 51)","rgb(230, 46, 0)"];
 
@@ -671,8 +671,7 @@ class ScatterPlot {
 		let gradient3 = svg.append('linearGradient')
 			.attr('id', 'gradient3');
 				
-		// Create the stops of the main gradient. Each stop will be assigned
-		// a class to style the stop using CSS.
+		// Creating thhe three gradients used to fill the three models
 		gradient1.append('stop')
 			.attr('class', 'stop-left1')
 			.attr('offset', '0');
@@ -725,7 +724,7 @@ class ScatterPlot {
 				
 					onSSPchanged(i);
 				})
-				.attr("r", 55)
+				.attr("r", 45)
 
 		group.append('text')
 			  	.text((d,i) => d['name'])
@@ -737,7 +736,7 @@ class ScatterPlot {
 	  .attr("y1", 125)
 	  .attr("x2", 320)
 	  .attr("y2", 125)          
-	  .attr("stroke-width", 2)
+	  .attr("stroke-width", 1)
 	  .attr("stroke", "black")
 	  .attr("marker-end", "url(#triangle)");
 
