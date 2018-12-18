@@ -556,24 +556,27 @@ whenDocumentLoaded(() => {
 function onSSPchanged(i) {
 	updateSSP(i);
 	if(previousSSP != selectedSSP) {
-	// Sow loading animation
-	showLoading();
-	// Update the scenario
+		// Sow loading animation
+		showLoading();
+		// Update the scenario
 
-	// Remove previous map source and layer bind to the previous scenario
-	mapRemove();
-	// Add the new source
-	mapSource();
-	// Keep the same parameter for the previous model (ie : population, temperature, ..)
-	mapLayer(previousCheck);
-	// Hidd the loading gif 
-	hideLoading();
-	//Update the info placeholder below the map
-	displayInfo();
+		// Remove previous map source and layer bind to the previous scenario
+		mapRemove();
+		// Add the new source
+		mapSource();
+		// Keep the same parameter for the previous model (ie : population, temperature, ..)
+		mapLayer(previousCheck);
+		// Hidd the loading gif 
+		hideLoading();
+		//Update the info placeholder below the map
+		displayInfo();
+	}
+	else {
+		console.log('Do not update, clic on same circle');
 	}
 
 	previousSSP = selectedSSP;
-	console.log("");
+	//console.log("");
 }
 
 
