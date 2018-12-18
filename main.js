@@ -51,14 +51,12 @@ const dataValues = {};
 dataValues.caloriesMin = 4.31*10**11;
 dataValues.caloriesMax = 1.11*10**14;
 
-dataValues.croplandMin = 90;
-dataValues.croplandMax = 8600;
+dataValues.yieldsMin = 3.60*10**9;
+dataValues.yieldsMax = 2*10**10;
 
 dataValues.populationMin = 40;
 dataValues.populationMax = 145*10**3;
 
-dataValues.temperatureMin = 3.60*10**9;
-dataValues.temperatureMax = 2*10**10;
 
 var isChrome = false;
 
@@ -66,7 +64,11 @@ var isChrome = false;
 console.log(dataValues);
 
 
-function updateSSP() {
+function updateSSP(i) {
+
+	selectedSSP = SCENARIO[i]['ssp'];
+
+	/*
 	if (document.getElementById("FormControlSelect").value == null) {
 		console.log("		default")
 		defaultSSP();
@@ -74,7 +76,9 @@ function updateSSP() {
 	else {
 		selectedSSP = document.getElementById("FormControlSelect").value;
 	}
-	console.log("updateSSP :" + selectedSSP);
+	console.log("updateSSP :" + selectedSSP; */
+	//d3.select('selectedSSP').style("opacity", 1);
+	
 }
 
 function defaultSSP() {
@@ -134,7 +138,7 @@ function showLegend() {
 
 function showLoading() {
 	// Adding loading gif
-	console.log('	Adding loading gif');
+	//console.log('	Adding loading gif');
 
 	var loadingDiv = document.createElement("div");
 	loadingDiv.id = "loading";
@@ -158,7 +162,7 @@ function showLoading() {
 function hideLoading() {
 	// Create the map + add layer takes around 4sec
 	setTimeout(function(){
-		console.log('	Removing loading gif');
+		//console.log('	Removing loading gif');
     	document.getElementById("loading").remove();
 	}, 4500);
 	//document.getElementById("loading").remove();
@@ -228,6 +232,7 @@ function mapRemoveLayerOnly() {
 function mapSource() {
 	
 	let dataSelect = selectedSSP;
+	console.log("datat sjeebf " + selectedSSP);
 	//console.log("Data file : geo_calories_filtered_" + dataSelect + "cc.geojson");
 
 	// Add source
@@ -235,8 +240,8 @@ function mapSource() {
 		type: "geojson",
 		// Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
 		// from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-		data: "final" + dataSelect + ".geojson",
-		//data: "geo_calories_filtered_" + dataSelect + "cc.geojson",
+		//data: "final" + dataSelect + ".geojson",
+		data: "_" + dataSelect.toLowerCase() + ".geojson",
 		cluster: false, // Set to true to sow clusters of points
 		clusterMaxZoom: 6, // Max zoom to cluster points on
 		clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
@@ -246,22 +251,15 @@ function mapSource() {
 function mapLayer(subData) {
 
 	if (typeof(subData)==='undefined') subData = "calories";
-	console.log("	subData :" + subData);
-	console.log("	min and max " + dataValues[subData + "Min"] + " " + dataValues[subData + "Max"]);
+	//console.log("	subData :" + subData + " : min and max " + dataValues[subData + "Min"] + " " + dataValues[subData + "Max"]);
 
 	var minValue = document.getElementById('legend_value_min');
-	//minValue.innerHTML = dataValues[subData + "Min"];
 	var maxValue = document.getElementById('legend_value_max');
-	//maxValue.innerHTML = dataValues[subData + "Max"];
-	//str.match(/.{1,3}/g)
 
-	if(subData == "calories" || subData == "temperature") {
+
+	if(subData == "calories" || subData == "yields") {
 		minValue.innerHTML = Math.round(dataValues[subData + "Min"]/10**3).toLocaleString();
 		maxValue.innerHTML = Math.round(dataValues[subData + "Max"]/10**3).toLocaleString();
-	}
-	else if(subData == "cropland") {
-		minValue.innerHTML = 0;
-		maxValue.innerHTML = 100;
 	}
 	else if(subData == "population") {
 		minValue.innerHTML = dataValues[subData + "Min"].toLocaleString();
@@ -439,11 +437,10 @@ function mapInteract() {
 		// Retrieving information of the selected point
 		var calories =  Math.round(e.features[0].properties.calories/10**3);
 		calories = calories.toLocaleString();
-		var cropland = Math.round(100*e.features[0].properties.cropland/dataValues.croplandMax);
 		var population = Math.round(e.features[0].properties.population);
 		population = population.toLocaleString();
-		var temperature = Math.round(e.features[0].properties.temperature/10**3);
-		temperature = temperature.toLocaleString();
+		var yields = Math.round(e.features[0].properties.yields/10**3);
+		yields = yields.toLocaleString();
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
@@ -471,10 +468,8 @@ function mapInteract() {
 		popupValue.className = "popup_value";
 		if (subitem == "calories"){
 			popupValue.innerHTML = calories;}
-		else if (subitem == "cropland"){
-			popupValue.innerHTML = cropland;}
-		else if (subitem == "temperature"){
-			popupValue.innerHTML = temperature;}
+		else if (subitem == "yields"){
+			popupValue.innerHTML = yields;}
 		else if (subitem == "population"){
 			popupValue.innerHTML = population;}
 
@@ -555,14 +550,16 @@ whenDocumentLoaded(() => {
 	console.log("End onload");
 
 	const plot = new ScatterPlot('svg_menu', SCENARIO);
+	//d3.select("#SSP1").style('opacity',1);
 });
 
 
-function onSSPchanged() {
+function onSSPchanged(i) {
+
 	// Sow loading animation
 	showLoading();
 	// Update the scenario
-	updateSSP();
+	updateSSP(i);
 	// Remove previous map source and layer bind to the previous scenario
 	mapRemove();
 	// Add the new source
@@ -620,6 +617,7 @@ var getLocalStorageSize = function() {
 
 ///////////////////////////////////////////////
 
+
 // Below we are looking at the event onclik for a checkboxes and update the layer's map depending on the parameter selected.
 var checkboxes = document.getElementsByClassName("form-check-input");
 // By default, the parameter is calories
@@ -641,17 +639,18 @@ for(let i=0; i<checkboxes.length;i++){
 
 ///////////////////////////////////////////////
 
-const MARGIN = { top: 10, right: 10, bottom: 10, left: 10 };
+const MARGIN = { top: 5, right: 5, bottom: 5, left: 5 };
 
 
-const SCENARIO = [{'x': 50, 'y': 100,'name' :'Sustainability'},
-				  {'x': 150, 'y': 300,'name' :'Inequality'},
-				  {'x': 50, 'y': 300,'name' :'Fossil'}];
+const SCENARIO = [{'x': 50,  'y': 60,'name' :'Sustainability', 'ssp':'SSP1'},
+				  {'x': 150, 'y': 60,'name' :'Inequality',	   'ssp':'SSP4'},
+				  {'x': 250, 'y': 60,'name' :'Fossil',         'ssp':'SSP5'}];
+				 
+const SCENARIO_COLORS = ["rgb(51, 204, 51)","rgb(255, 153, 51)","rgb(230, 46, 0)"];
 
-console.log(SCENARIO);
+
 
 class ScatterPlot {
-	/* your code here */
 
 	constructor (id, data) {
 
@@ -659,61 +658,73 @@ class ScatterPlot {
 		let svgHeight = parseInt(svg.style("height"));
 		let svgWidth = parseInt(svg.style("width"));
 
-		console.log(svgHeight +" "+svgWidth);
+		//console.log(svgHeight +" "+svgWidth);
 
 		var scaleY = d3.scaleLinear()
-								.domain([0, 400])
+								.domain([0, 100])
 								.range([svgHeight - MARGIN['top'], MARGIN['top']]);
 
 		var scaleX = d3.scaleLinear()
-								.domain([0, 200])
+								.domain([0, 300])
 								.range([MARGIN['bottom'], svgWidth - MARGIN['bottom']]);
 
-		
 
-		//svg.append("rect")
-    	//		.attr("fill", "red")
-    	//		.attr("fill-opacity","0.8");
+	 	let group = svg.selectAll("group")
+						.data(data)
+						.enter()
+							.append('g')
+							.attr('transform', (d,i) => "translate("+scaleX(d['x']) + "," + scaleY(d['y']) + ")" )
 
-	 	let circle = svg.selectAll("circle")
-											.data(data)
-											.enter()
-											  .append('circle')
-												.attr('cx', (d, i) => scaleX(d['x']))
-												.attr('cy', (d, i) => scaleY(d['y']))
-												.attr("class", 'svg_circle')
-												.attr("r", 1)
-											.transition()
-											  .attr("r", 50);
-											/*	.style("fill", "blue")
-											.exit().transition()
-												.style("fill", "purple")
-												.attr("r",0)
-												.remove();*/
+		group.append('circle')
+				.attr('cx', 0)
+				.attr('cy', 0)
+				.attr("class", 'svg_circle')
+				.attr('fill', (d,i) => SCENARIO_COLORS[i])
+				.on('click',function(d,i) { 
+				
+					// Opacity all circle
+					d3.selectAll('circle').style('opacity',0.6);
+					// Light the select one
+			 		d3.select(this).style("opacity", 1);
+				
+					onSSPchanged(i);
+				})
+				.attr("r", 55)
 
-			var x = d3.scaleOrdinal()
-								.range([0, svgWidth - MARGIN['bottom']]);
+		group.append('text')
+			  	.text((d,i) => d['name'])
+			  	.attr('class', 'circle_text')	
+										
+	//line              
+	svg.append("line")
+	  .attr("x1", 0)
+	  .attr("y1", 125)
+	  .attr("x2", 320)
+	  .attr("y2", 125)          
+	  .attr("stroke-width", 2)
+	  .attr("stroke", "black")
+	  .attr("marker-end", "url(#triangle)");
 
-										 //.rangePoints([0, 200]);
+	svg.append("svg:defs").append("svg:marker")
+	    .attr("id", "triangle")
+	    .attr("refX", 5)
+	    .attr("refY", 5)
+	    .attr("markerWidth", 20)
+	    .attr("markerHeight", 20)
+	    .attr("orient", "auto")
+	    .append("path")
+	    .attr("d", "M 0 0 10 5 0 10 0 5")
+	    .style("fill", "black");
 
-			var x_axis = d3.axisBottom()
-							        .scale(x)
-							        //.tickValues(DAYS)
-							        					 	
-			var y_axis = d3.axisLeft()
-									.scale(scaleTemp);
-
-	svg.append("g")
-			//.attr("transform", "translate(" + MARGIN['left'] + ",0)")
-			.call(y_axis)
-					
-	svg.append("g")
-			.attr("transform", "translate(0," + (svgHeight - MARGIN['bottom']) + ")")
-			.call(x_axis)
+	svg.append('text')
+			.attr('x',0)
+			.attr('y',140)
+			.attr('class','legend_txt')
+			.text('Socio-economic challenge for adapation');
 
 	}
-
 }
+
 
 
 

@@ -161,16 +161,35 @@ POPUP
 	font-size: 0.9rem;
 }
 
+/* SVG Menu */
 
 #svg_menu {
 	width: 100%;
-	height: auto;
-	background-color: black;
+	height: 150px;
+	background-color: #f8f9fa;
 }
 
 .svg_circle {
-	opacity: 80%;
-	fill : blue;
+	opacity: 0.6;
+	/*fill : blue;*/
+}
+
+.svg_circle_click {
+	opacity: 1;
+}
+
+.circle_text {
+	fill: black;
+	text-anchor: middle;
+	alignment-baseline: middle;
+	dominant-baseline: middle;
+}
+
+.legend_txt {
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
 }
 
 body.modal-open .page_container{
