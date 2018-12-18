@@ -161,6 +161,18 @@ POPUP
 	font-size: 0.9rem;
 }
 
+
+#svg_menu {
+	width: 100%;
+	height: auto;
+	background-color: black;
+}
+
+.svg_circle {
+	opacity: 80%;
+	fill : blue;
+}
+
 body.modal-open .page_container{
     -webkit-filter: blur(6px);
     -moz-filter: blur(6px);

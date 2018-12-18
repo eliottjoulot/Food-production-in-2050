@@ -281,7 +281,7 @@ function mapLayer(subData) {
 				["linear"],
 				["get", subData],
 				dataValues[subData + 'Min'], 0,
-				dataValues[subData + 'Max'], 1
+				2*dataValues[subData + 'Max'], 1
 			],
 			// Increase the heatmap color weight weight by zoom level
 			// heatmap-intensity is a multiplier on top of heatmap-weight
@@ -551,9 +551,10 @@ whenDocumentLoaded(() => {
 	displayInfo();
 	// Allow interactions
 	mapInteract();
-	
 	//localStorage.setItem(selectedSSP, "geo_calories_filtered_" + dataSelect + "cc.geojson");
 	console.log("End onload");
+
+	const plot = new ScatterPlot('svg_menu', SCENARIO);
 });
 
 
@@ -636,3 +637,83 @@ for(let i=0; i<checkboxes.length;i++){
       } 
     };
 }
+
+
+///////////////////////////////////////////////
+
+const MARGIN = { top: 10, right: 10, bottom: 10, left: 10 };
+
+
+const SCENARIO = [{'x': 50, 'y': 100,'name' :'Sustainability'},
+				  {'x': 150, 'y': 300,'name' :'Inequality'},
+				  {'x': 50, 'y': 300,'name' :'Fossil'}];
+
+console.log(SCENARIO);
+
+class ScatterPlot {
+	/* your code here */
+
+	constructor (id, data) {
+
+		let svg = d3.select('#'+id);
+		let svgHeight = parseInt(svg.style("height"));
+		let svgWidth = parseInt(svg.style("width"));
+
+		console.log(svgHeight +" "+svgWidth);
+
+		var scaleY = d3.scaleLinear()
+								.domain([0, 400])
+								.range([svgHeight - MARGIN['top'], MARGIN['top']]);
+
+		var scaleX = d3.scaleLinear()
+								.domain([0, 200])
+								.range([MARGIN['bottom'], svgWidth - MARGIN['bottom']]);
+
+		
+
+		//svg.append("rect")
+    	//		.attr("fill", "red")
+    	//		.attr("fill-opacity","0.8");
+
+	 	let circle = svg.selectAll("circle")
+											.data(data)
+											.enter()
+											  .append('circle')
+												.attr('cx', (d, i) => scaleX(d['x']))
+												.attr('cy', (d, i) => scaleY(d['y']))
+												.attr("class", 'svg_circle')
+												.attr("r", 1)
+											.transition()
+											  .attr("r", 50);
+											/*	.style("fill", "blue")
+											.exit().transition()
+												.style("fill", "purple")
+												.attr("r",0)
+												.remove();*/
+
+			var x = d3.scaleOrdinal()
+								.range([0, svgWidth - MARGIN['bottom']]);
+
+										 //.rangePoints([0, 200]);
+
+			var x_axis = d3.axisBottom()
+							        .scale(x)
+							        //.tickValues(DAYS)
+							        					 	
+			var y_axis = d3.axisLeft()
+									.scale(scaleTemp);
+
+	svg.append("g")
+			//.attr("transform", "translate(" + MARGIN['left'] + ",0)")
+			.call(y_axis)
+					
+	svg.append("g")
+			.attr("transform", "translate(0," + (svgHeight - MARGIN['bottom']) + ")")
+			.call(x_axis)
+
+	}
+
+}
+
+
+
