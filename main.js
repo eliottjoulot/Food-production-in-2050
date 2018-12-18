@@ -60,6 +60,8 @@ dataValues.populationMax = 145*10**3;
 dataValues.temperatureMin = 3.60*10**9;
 dataValues.temperatureMax = 2*10**10;
 
+var isChrome = false;
+
 //dataValues.
 console.log(dataValues);
 
@@ -499,8 +501,16 @@ function mapInteract() {
 		accessToken: mapboxgl.accessToken
 	}), 'top-left');
 
+	// Add geolocate control to the map.
+	map.addControl(new mapboxgl.GeolocateControl({
+		positionOptions: {
+			enableHighAccuracy: true
+		},
+		trackUserLocation: true
+	}), 'top-left');
+
 	// Add zoom and rotation controls to the map.
-	map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+	//map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
 	// Full-screen toggle
 	map.addControl(new mapboxgl.FullscreenControl());
@@ -520,6 +530,7 @@ function whenDocumentLoaded(action) {
 
 whenDocumentLoaded(() => {
 	sessionStorageDetect();
+	chromeDetect();
 	// Set the SSP scenario to the default one.
 	defaultSSP();
 	// Create the map
@@ -575,9 +586,7 @@ function chromeDetect() {
 	//Detect if the user is using chrome
 	if(navigator.userAgent.indexOf("Chrome") != -1 ) {
 		//alert('Chrome');
-		modalFooter = document.getElementsByClassName("modal-footer");
-		//modalFooter.style.visibility = "hidden";
-		modalFooter.parentNode.removeChild(modalFooter);
+		isChrome = true;
 	}
 }
 
