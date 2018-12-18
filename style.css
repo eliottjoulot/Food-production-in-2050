@@ -169,9 +169,38 @@ POPUP
 	background-color: #f8f9fa;
 }
 
-.svg_circle {
+.stop-left1 {
+	stop-color: #FCE54E;  /* Indigo */
+}
+.stop-right1 {
+	stop-color: #F5B13F;  /* Teal */
+}
+.stop-left2 {
+	stop-color: #F3AB3D;  /* Indigo */
+}
+.stop-right2 {
+	stop-color: #EF7930;  /* Teal */
+}
+.stop-left3 {
+	stop-color: #EE732F;  /* Indigo */
+}
+.stop-right3 {
+	stop-color: #EC4826;  /* Teal */
+}
+.filled1 {
+	fill: url(#gradient1);
+}
+.filled2 {
+	fill: url(#gradient2);
+}
+.filled3 {
+	fill: url(#gradient3);
+}
+
+.filled1, .filled2, .filled3 {
 	opacity: 0.6;
 	/*fill : blue;*/
+	cursor: pointer;
 }
 
 .svg_circle_click {
@@ -179,10 +208,11 @@ POPUP
 }
 
 .circle_text {
-	fill: black;
+	fill: white;
 	text-anchor: middle;
 	alignment-baseline: middle;
 	dominant-baseline: middle;
+	font-size: 14px;
 }
 
 .legend_txt {

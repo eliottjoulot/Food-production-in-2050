@@ -646,7 +646,7 @@ const SCENARIO = [{'x': 50,  'y': 60,'name' :'Sustainability', 'ssp':'SSP1'},
 				  {'x': 150, 'y': 60,'name' :'Inequality',	   'ssp':'SSP4'},
 				  {'x': 250, 'y': 60,'name' :'Fossil',         'ssp':'SSP5'}];
 				 
-const SCENARIO_COLORS = ["rgb(51, 204, 51)","rgb(255, 153, 51)","rgb(230, 46, 0)"];
+//const SCENARIO_COLORS = ["rgb(51, 204, 51)","rgb(255, 153, 51)","rgb(230, 46, 0)"];
 
 
 
@@ -657,6 +657,37 @@ class ScatterPlot {
 		let svg = d3.select('#'+id);
 		let svgHeight = parseInt(svg.style("height"));
 		let svgWidth = parseInt(svg.style("width"));
+
+		let gradient1 = svg.append('linearGradient')
+			.attr('id', 'gradient1');
+		let gradient2 = svg.append('linearGradient')
+			.attr('id', 'gradient2');
+		let gradient3 = svg.append('linearGradient')
+			.attr('id', 'gradient3');
+				
+		// Create the stops of the main gradient. Each stop will be assigned
+		// a class to style the stop using CSS.
+		gradient1.append('stop')
+			.attr('class', 'stop-left1')
+			.attr('offset', '0');
+		gradient1.append('stop')
+			.attr('class', 'stop-right1')
+			.attr('offset', '1');
+
+		gradient2.append('stop')
+			.attr('class', 'stop-left2')
+			.attr('offset', '0');
+		gradient2.append('stop')
+			.attr('class', 'stop-right2')
+			.attr('offset', '1');
+
+		gradient3.append('stop')
+			.attr('class', 'stop-left3')
+			.attr('offset', '0');
+		gradient3.append('stop')
+			.attr('class', 'stop-right3')
+			.attr('offset', '1');
+		
 
 		//console.log(svgHeight +" "+svgWidth);
 
@@ -678,10 +709,9 @@ class ScatterPlot {
 		group.append('circle')
 				.attr('cx', 0)
 				.attr('cy', 0)
-				.attr("class", 'svg_circle')
-				.attr('fill', (d,i) => SCENARIO_COLORS[i])
+				.attr("class", (d,i) => 'filled'+(i+1))
+				//.attr('fill', (d,i) => SCENARIO_COLORS[i])
 				.on('click',function(d,i) { 
-				
 					// Opacity all circle
 					d3.selectAll('circle').style('opacity',0.6);
 					// Light the select one
