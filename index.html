@@ -42,7 +42,7 @@
 		
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
+				<li class="nav-item">
 					<a class="nav-link" href="info.html">Story</a>
 				</li>
 			</ul>
@@ -61,14 +61,14 @@
 
 		<div class="row">
 			
-			<div class="col-xs-12 col-sm-9 container map-container" style="padding: 0px 20px 0px 0px; background-color: white">
+			<div class="col-xs-12 col-sm-8 container map-container" style="padding: 0px 20px 0px 0px; background-color: white">
 				
 				<div id='map' style='width: 100%; height: 100%;border-radius: 6px;border: 1px solid #dedddd;'>
 				
 				</div>
 			</div>
 
-			<div class="col col-sm-3 card bg-light container" style="height: auto;">
+			<div class="col col-sm-4 card bg-light container" style="height: auto;">
 				<h5 class="card-header">Settings</h5>
 				<div class="card-body">
 					<form>
@@ -222,10 +222,29 @@
 				<p><strong>How to use:</strong></p>
 
 			</div>
-				
-			<div class="modal-footer mr-auto">
+
+			<!-- <div class="modal-footer mr-auto">
 				<p><strong>We highly recommend to use Chrome for a smoother experience.</strong></p>
-			</div>
+			</div> -->
+				
+			<script>
+				$(document).ready(function() {
+					if(1) { //navigator.userAgent.indexOf("Chrome") == -1 
+						
+						var footer = document.createElement("div");
+						footer.className = "modal-footer mr-auto";
+
+						var chromeAdvice = document.createElement("p");
+						chromeAdvice.innerHTML = "We highly recommend to use Chrome for a smoother experience."
+
+						footer.appendChild(chromeAdvice);
+
+						var elem = document.getElementsByClassName('modal-content');
+						elem.appendChild(footer);
+					}
+				}
+			</script>
+			
 			
 		</div>
 	</div>
