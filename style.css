@@ -72,6 +72,11 @@ You can find the basic concepts of CSS here: https://developer.mozilla.org/en-US
 	padding: 0px;
 }
 
+
+.sub-card {
+	width: 600px;
+}
+
 .info-container {
 	height: auto;
 	text-align: justify;

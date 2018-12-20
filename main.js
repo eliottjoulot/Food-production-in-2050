@@ -48,13 +48,13 @@ var color6 = "rgba(20,120,20,0.6)";
 
 const dataValues = {};
 	
-dataValues.caloriesMin = 4.31*10**11;
-dataValues.caloriesMax = 1.11*10**14;
+dataValues.caloriesMin = 4.30*10**11;
+dataValues.caloriesMax = 1.1*10**14;
 
 dataValues.yieldsMin = 3.60*10**9;
 dataValues.yieldsMax = 2*10**10;
 
-dataValues.populationMin = 40;
+dataValues.populationMin = 0;
 dataValues.populationMax = 145*10**3;
 
 
@@ -98,8 +98,7 @@ function displayInfo() {
 	//console.log("Display info : " + selectedSSP);
 	document.getElementById(selectedSSP).style.display = "inline";
 	previousSSP = selectedSSP;	
-	addTitle()
-	
+	addTitle();	
 }
 
 var iinc=0;
@@ -179,7 +178,7 @@ function hideLoading() {
 	setTimeout(function(){
 		//console.log('	Removing loading gif');
     	document.getElementById("loading").remove();
-	}, 4500);
+	}, 4000);
 	//document.getElementById("loading").remove();
 }
 
@@ -241,6 +240,10 @@ function mapRemoveLayerOnly() {
 
 }
 
+/*
+$.getJSON("_ssp1.geojson", function(json) {
+    console.log(json); // this will show the info it in firebug console
+});*/
 
 
 // Display the data on the map as a layer
@@ -249,11 +252,27 @@ function mapSource() {
 	let dataSelect = selectedSSP;
 	console.log('New scenario: ' + selectedSSP);
 
+	/*var data = "";
+	if(isDataCache()) {
+		console.log("Loading the data in cache");
+		//_data = sessionStorage.getItem(selectedSSP.toLowerCase()+"_data", "_"+selectedSSP.toLowerCase()+".geojson" );
+		
+		//var retrievedObject = sessionStorage.getItem(selectedSSP.toLowerCase()+"_data");
+		//console.log("l,oik,  " + retrievedObject);
+		//_data data = JSON.parse(retrievedObject);
+		
+	}
+	else {
+		console.log("Data not in cache");
+		_data = "_" + dataSelect.toLowerCase() + ".geojson"
+	}*/
+	
+
 	// Add source
 	map.addSource("earthquakes", {
 		type: "geojson",
-		//data: "final" + dataSelect + ".geojson",
-		data: "_" + dataSelect.toLowerCase() + ".geojson",
+		data: "_" + dataSelect + ".geojson",
+		//data: _data,
 		cluster: false, // Set to true to sow clusters of points
 		clusterMaxZoom: 6, // Max zoom to cluster points on
 		clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
@@ -275,7 +294,7 @@ function mapLayer(subData) {
 	}
 	else if(subData == "population") {
 		minValue.innerHTML = dataValues[subData + "Min"].toLocaleString();
-		maxValue.innerHTML = dataValues[subData + "Max"].toLocaleString();
+		maxValue.innerHTML = Math.round(dataValues[subData + "Max"]).toLocaleString();
 	}
 
 	// Add layer
@@ -422,6 +441,7 @@ function mapLayer(subData) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var description = e.features[0].properties.description;
 
+
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
         // over the copy being pointed to.
@@ -449,8 +469,10 @@ function mapInteract() {
 		// Retrieving information of the selected point
 		var calories =  Math.round(e.features[0].properties.calories/10**3);
 		calories = calories.toLocaleString();
+		
 		var population = Math.round(e.features[0].properties.population);
 		population = population.toLocaleString();
+		
 		var yields = Math.round(e.features[0].properties.yields/10**3);
 		yields = yields.toLocaleString();
 
@@ -478,12 +500,16 @@ function mapInteract() {
 
 		var popupValue = document.createElement("p");
 		popupValue.className = "popup_value";
-		if (subitem == "calories"){
-			popupValue.innerHTML = calories;}
-		else if (subitem == "yields"){
-			popupValue.innerHTML = yields;}
-		else if (subitem == "population"){
-			popupValue.innerHTML = population;}
+		
+		if (subitem == "calories") {
+			popupValue.innerHTML = calories + " " +parameter_unit[subitem];
+		}
+		else if (subitem == "yields") {
+			popupValue.innerHTML = yields + " " +parameter_unit[subitem];
+		}
+		else if (subitem == "population") {
+			popupValue.innerHTML = population + " " +parameter_unit[subitem];
+		}
 
 		popupDiv.appendChild(popupTitle);
 		popupDiv.appendChild(popupValue);
@@ -599,6 +625,20 @@ function onSSPchanged(i) {
 
 
 ///////////////////////////////////////////////
+
+/*
+function isDataCache() {
+	// Is the data is the cache ?
+	if (sessionStorage.getItem(selectedSSP.toLowerCase() + "_save") == undefined) {
+		// If not we save it in
+		sessionStorage[selectedSSP.toLowerCase() + "_save"] = JSON.stringify("_" + selectedSSP.toLowerCase() + ".geojson");
+		//sessionStorage.setItem(selectedSSP.toLowerCase() + "_data", "_" + selectedSSP.toLowerCase() + ".geojson" );
+		return false;	
+	}
+	else {
+		return true;
+	}
+}*/
 
 
 function chromeDetect() { 
@@ -772,7 +812,7 @@ class ScatterPlot {
 			.attr('x',0)
 			.attr('y',120)
 			.attr('class','legend_txt')
-			.text('Socio-economic challenge for adapation');
+			.text('Socio-economic challenges');
 
 	}
 }
