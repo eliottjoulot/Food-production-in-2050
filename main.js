@@ -60,8 +60,9 @@ dataValues.populationMax = 145*10**3;
 
 var isChrome = false;
 
-//dataValues.
-console.log(dataValues);
+const parameter_unit = {'calories': 'kcal/year', 
+						'yields': 'kcal/ha',
+						'population': '/px'};
 
 
 function updateSSP(i) {
@@ -97,6 +98,20 @@ function displayInfo() {
 	//console.log("Display info : " + selectedSSP);
 	document.getElementById(selectedSSP).style.display = "inline";
 	previousSSP = selectedSSP;	
+	addTitle()
+	
+}
+
+var iinc=0;
+function addTitle() {
+
+	var title = document.getElementById('title');
+	
+	for (i=0 ; i<SCENARIO.length ; i++) {
+		if (SCENARIO[i]["ssp"] == previousSSP ) {
+			title.innerHTML = SCENARIO[i]["name"] + " development : " + previousCheck + " " + parameter_unit[previousCheck];
+		}
+	}
 }
 
 function showLegend() {
@@ -638,6 +653,7 @@ for(let i=0; i<checkboxes.length;i++){
       		mapRemoveLayerOnly();
       		mapLayer(checkboxes[i].value);
       		previousCheck = checkboxes[i].value;
+      		addTitle();
       } 
     };
 }
