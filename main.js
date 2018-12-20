@@ -39,12 +39,12 @@ var selectedOPTION;	// The scenario choosen
 var map;			// The map where the data is displayed on
 
 // Colors used for data
-var color1 = "rgba(255,228,181,0)";
-var color2 = "rgba(140,221,89,0.5)";
-var color3 = "rgba(84,192,49,0.5)";
-var color4 = "rgba(43,162,22,0.5)";
-var color5 = "rgba(31,131,4,0.5)";
-var color6 = "rgba(20,120,20,0.6)";
+var color1 = "rgba(255,255,123,0.1)";
+var color2 = "rgba(200,255,102,0.5)";
+var color3 = "rgba(177,255,20,0.5)";
+var color4 = "rgba(123,255,47,0.5)";
+var color5 = "rgba(100,230,50,0.5)";
+var color6 = "rgba(0,100,0,0.6)";
 
 const dataValues = {};
 	
@@ -328,12 +328,12 @@ function mapLayer(subData) {
 				"interpolate",
 				["linear"],
 				["heatmap-density"],
-				0, "rgba(255,228,181,0)",
-				0.2, "rgba(140,221,89,0.5)",
-				0.4, "rgba(84,192,49,0.5)",
-				0.6, "rgba(43,162,22,0.5)",
-				0.8, "rgba(31,131,4,0.5)",
-				1, "rgba(20,120,20,0.6)"
+				0, color1,
+				0.2, color2,
+				0.4, color3,
+				0.6, color4,
+				0.8, color5,
+				1, color6
 			],
 			// Adjust the heatmap radius by zoom level
 			"heatmap-radius": [
