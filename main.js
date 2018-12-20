@@ -721,7 +721,7 @@ class ScatterPlot {
 					d3.selectAll('circle').style('opacity',0.6);
 					// Light the select one
 			 		d3.select(this).style("opacity", 1);
-				
+					// Update map layer
 					onSSPchanged(i);
 				})
 				.attr("r", 45)
@@ -729,12 +729,13 @@ class ScatterPlot {
 		group.append('text')
 			  	.text((d,i) => d['name'])
 			  	.attr('class', 'circle_text')	
-										
+			
+					
 	//line              
 	svg.append("line")
 	  .attr("x1", 0)
 	  .attr("y1", 105)
-	  .attr("x2", 320)
+	  .attr("x2", svgWidth-20)
 	  .attr("y2", 105)          
 	  .attr("stroke-width", 1)
 	  .attr("stroke", "black")
