@@ -44,7 +44,7 @@ var color2 = {'calories': "rgba(200,255,102,0.6)", 'yields': "rgba(200,255,102,0
 var color3 = {'calories': "rgba(177,255,20,0.6)",  'yields': "rgba(177,255,20,0.6)",  "population": "rgba(255,177,20,0.6)"};
 var color4 = {'calories': "rgba(123,255,47,0.6)",  'yields': "rgba(123,255,47,0.6)",  "population": "rgba(255,123,47,0.6)"};
 var color5 = {'calories': "rgba(100,230,50,0.6)",  'yields': "rgba(100,230,50,0.6)",  "population": "rgba(230,50,50,0.6)"};
-var color6 = {'calories': "rgba(0,100,0,0.6)",	   'yields': "rgba(0,100,0,0.6)", 	  "population": "rgba(127,0,0,0.7)"};
+var color6 = {'calories': "rgba(0,100,0,0.6)",	   'yields': "rgba(0,100,0,0.6)", 	  "population": "rgba(127,0,0,0.6)"};
 
 const dataValues = {};
 	
