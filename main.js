@@ -84,7 +84,7 @@ function updateSSP(i) {
 
 function defaultSSP() {
 	selectedSSP = "SSP1";
-	document.getElementById("exampleRadios1").checked = true;
+	document.getElementById("ssp1").checked = true;
     //document.getElementById(selectedSSP).style.display = "inline";
 	//$('.help-modal').modal('show');
 }
@@ -108,7 +108,7 @@ function addTitle() {
 	
 	for (i=0 ; i<SCENARIO.length ; i++) {
 		if (SCENARIO[i]["ssp"] == previousSSP ) {
-			title.innerHTML = SCENARIO[i]["name"] + " development : " + previousCheck + " " + parameter_unit[previousCheck];
+			title.innerHTML = SCENARIO[i]["name"] + " development : " + previousCheck + " in " + parameter_unit[previousCheck];
 		}
 	}
 }
