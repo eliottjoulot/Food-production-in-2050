@@ -763,7 +763,6 @@ class ScatterPlot {
 				.attr('cx', 0)
 				.attr('cy', 0)
 				.attr("class", (d,i) => 'filled'+(i+1))
-				//.attr('fill', (d,i) => SCENARIO_COLORS[i])
 				.on('click',function(d,i) { 
 					// Opacity all circle
 					d3.selectAll('circle').style('opacity',0.6);
