@@ -404,9 +404,9 @@ function mapLayer(subData) {
                 "interpolate",
                 ["linear"],
                 ["get", subData],
-                dataValues[subData + 'Min'], "rgba(250,250,250,0.1)",
-                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, "rgba(43,162,22,0.5)",
-                dataValues[subData + 'Max'], "rgba(20,120,20,0.6)"
+                dataValues[subData + 'Min'], color1,
+                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, color3,
+                dataValues[subData + 'Max'], color6
             ],
             // Transition from heatmap to circle layer by zoom level
             "circle-opacity": [
