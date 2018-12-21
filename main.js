@@ -250,7 +250,7 @@ $.getJSON("_ssp1.geojson", function(json) {
 function mapSource() {
 	
 	let dataSelect = selectedSSP;
-	console.log('New scenario: ' + selectedSSP);
+	console.log('New scenario: ' + selectedSSP.toLowerCase());
 
 	// Add source
 	map.addSource("earthquakes", {
