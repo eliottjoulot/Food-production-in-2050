@@ -8,4 +8,5 @@ In this project, we will try to apply our skills and give insights to tell a sto
 
 # Map visualization
 
-In this project we tried to carry out a worldwide map visualiztion with prediction scenarios over the 2050. In order to access it, you need to can either clone this repository and open "index.html" in a browser or direclty go to this link : https://eliottjoulot.github.io/Food-production-in-2050/index.html?fbclid=IwAR3OTDkI2qFoolnIsqSC9GeCdK1B8cIjRVnFfdjwQt7oVByUM0q50907Ss0
+In this project we tried to carry out a worldwide map visualiztion with prediction scenarios over the 2050.
+In order to access it, you need to can either clone this repository and open "index.html" in a browser or direclty go to this link : https://eliottjoulot.github.io/Food-production-in-2050/index.html?fbclid=IwAR3OTDkI2qFoolnIsqSC9GeCdK1B8cIjRVnFfdjwQt7oVByUM0q50907Ss0
