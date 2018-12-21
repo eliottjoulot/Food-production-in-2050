@@ -48,11 +48,11 @@ var color6 = {'calories': "rgba(0,100,0,0.6)",	   'yields': "rgba(0,100,0,0.6)",
 
 const dataValues = {};
 	
-dataValues.caloriesMin = 4.30*10**11;
+dataValues.caloriesMin = 4*10**11;
 dataValues.caloriesMax = 1.1*10**14;
 
-dataValues.yieldsMin = 3.60*10**9;
-dataValues.yieldsMax = 2*10**10;
+dataValues.yieldsMin = 8*10**8;
+dataValues.yieldsMax = 3*10**10;
 
 dataValues.populationMin = 0;
 dataValues.populationMax = 145*10**3;
