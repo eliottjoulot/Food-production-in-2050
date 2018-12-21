@@ -252,9 +252,7 @@ function mapSource() {
 
 	// Fly to interesting location according to the selected model
 	map.flyTo({
-        center: [
-            -74.50 + (Math.random() - 0.5) * 10,
-			40 + (Math.random() - 0.5) * 10],
+        center: [85, 20],
 		zoom: 4
     });
 	

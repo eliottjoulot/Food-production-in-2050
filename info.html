@@ -13,29 +13,32 @@
 
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	
 </head>
 
 <body>
 <div class="page_container">
 
-	<div class="header">
-		<nav class="navbar navbar-expand-lg navbar-dark">
-			<a class="navbar-brand" href="index.html">
-				Home
-			</a>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item">
+	<nav class="navbar navbar-expand-lg navbar-dark">
+			<a class="navbar-brand" href="index.html">Home</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
 						<a class="nav-link" href="info.html">Story</a>
 					</li>
 				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target=".help-modal">Help</button>
+				</form>
 			</div>
-			<form class="form-inline">
-				<button class="btn btn-outline-light my-2 my-sm-0" type="button" data-toggle="modal" data-target=".bd-example-modal-lg">Help</button>
-			</form>
-
 		</nav>
-	</div>
 
 
 	<div class="textJustify sub-card story" class="content">
@@ -120,28 +123,63 @@
 </div>
 </body>
 
-<!-- Help modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">How to use</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<p> The drop menu allows you to select a model, once selected you can choose which sub data to visualize.
-					Then you can use scroll or "+" and "-" buttons to zoom on the map. Clic and realse to move around the world.
-
-				</p>
+<<!-- Help modal -->
+<div class="modal fade help-modal" tabindex="-1" role="dialog" aria-labelledby="helpModal" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Welcome to our data visualization project!</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" w3-include-html="content.html">
+					<p><strong>What are the impacts of the society's behavior on our futur world?</strong></p>
+					<p>
+						This interactive data story lets you dive in several climate change scenario over the year 2050. 
+						<br>From to fossil-fueled to sustainability development, you will be able to see several impact on the food production.
+						<br>If you want to know <a href="info.html">more</a> about it or you prefer to go direclty to the <a href="index.html">visualization</a>
+					</p>
+					<p><strong>How to use:</strong></p>
+					<p>
+						On the right side, you can first select which type of development you want by clicking on circles. </br>
+						Once selected, you can then select from, three possible parameters, the one to visualize given the model chosen.</br>
+						<img src="img/select_model.gif" alt="Select Model Gif" style="display: block;margin-left: auto;margin-right: auto;">
+						<br>
+						Thus you are free to explore the world prediction. First the model will show a heatmap of the selected parameter. Then you will be able to zoom and click on dots to obtain values.
+						<br>
+						<img src="img/map_resized.gif" alt="Map Point View Gif" style="display: block;margin-left: auto;margin-right: auto;">
+					</p>
+	
+				</div>
+	
+				<div class="modal-footer mr-auto">
+					<p><strong>We highly recommend to use Chrome for a smoother experience.</strong></p>
+				</div>
+					
+				<script>
+					$(document).ready(function() {
+						if(1) { //navigator.userAgent.indexOf("Chrome") == -1 
+							
+							var footer = document.createElement("div");
+							footer.className = "modal-footer mr-auto";
+	
+							var chromeAdvice = document.createElement("p");
+							chromeAdvice.innerHTML = "We highly recommend to use Chrome for a smoother experience."
+	
+							footer.appendChild(chromeAdvice);
+	
+							var elem = document.getElementsByClassName('modal-content');
+							//elem.appendChild(footer);
+						}
+	
+					});
+	
+				</script>
 				
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				
 			</div>
 		</div>
 	</div>
-</div>
 
 </html>
