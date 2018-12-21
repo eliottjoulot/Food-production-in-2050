@@ -266,6 +266,14 @@ function mapSource() {
 		console.log("Data not in cache");
 		_data = "_" + dataSelect.toLowerCase() + ".geojson"
 	}*/
+
+	// Fly to interesting location according to the selected model
+	map.flyTo({
+        center: [
+            -74.50 + (Math.random() - 0.5) * 10,
+			40 + (Math.random() - 0.5) * 10],
+		zoom: 4
+    });
 	
 
 	// Add source
