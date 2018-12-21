@@ -120,8 +120,8 @@ function showLegend() {
 	legendDiv.className = "legend";
 
 	var legendTitle = document.createElement("div");
-	legendTitle.className = "legend_title";
-	legendTitle.innerHTML = "Legend:";
+	legendTitle.id = "legend_title";
+	legendTitle.innerHTML = "Legend: ";
 
 	var legendColors = document.createElement("div");
 	legendColors.className = "legend_colors";
@@ -240,10 +240,7 @@ function mapRemoveLayerOnly() {
 
 }
 
-/*
-$.getJSON("_ssp1.geojson", function(json) {
-    console.log(json); // this will show the info it in firebug console
-});*/
+
 
 
 // Display the data on the map as a layer
@@ -252,20 +249,6 @@ function mapSource() {
 	let dataSelect = selectedSSP;
 	console.log('New scenario: ' + selectedSSP.toLowerCase());
 
-	/*var data = "";
-	if(isDataCache()) {
-		console.log("Loading the data in cache");
-		//_data = sessionStorage.getItem(selectedSSP.toLowerCase()+"_data", "_"+selectedSSP.toLowerCase()+".geojson" );
-		
-		//var retrievedObject = sessionStorage.getItem(selectedSSP.toLowerCase()+"_data");
-		//console.log("l,oik,  " + retrievedObject);
-		//_data data = JSON.parse(retrievedObject);
-		
-	}
-	else {
-		console.log("Data not in cache");
-		_data = "_" + dataSelect.toLowerCase() + ".geojson"
-	}*/
 
 	// Fly to interesting location according to the selected model
 	map.flyTo({
@@ -294,6 +277,10 @@ function mapLayer(subData) {
 
 	var minValue = document.getElementById('legend_value_min');
 	var maxValue = document.getElementById('legend_value_max');
+
+
+	var legendTitle = document.getElementById("legend_title");
+	legendTitle.innerHTML = "Legend : " + parameter_unit[subData];
 
 
 	if(subData == "calories" || subData == "yields") {
@@ -429,7 +416,7 @@ function mapLayer(subData) {
                 ["linear"],
                 ["get", subData],
                 dataValues[subData + 'Min'], color1,
-                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, color3,
+                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, color4,
                 dataValues[subData + 'Max'], color6
             ],
             // Transition from heatmap to circle layer by zoom level
