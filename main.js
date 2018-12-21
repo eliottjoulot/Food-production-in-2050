@@ -264,12 +264,14 @@ function mapSource() {
 	// Add source
 	map.addSource("earthquakes", {
 		type: "geojson",
-		data: "_" + dataSelect.toLowerCase() + ".geojson",
+		data: "data_" + dataSelect.toLowerCase() + ".geojson",
 		//data: _data,
 		cluster: false, // Set to true to sow clusters of points
 		clusterMaxZoom: 6, // Max zoom to cluster points on
 		clusterRadius: 10 // Radius of each cluster when clustering points (defaults to 50)
 	});
+
+	console.log('Data file ==> ' + "data_" + dataSelect.toLowerCase() + ".geojson");
 }
 
 function mapLayer(subData) {
