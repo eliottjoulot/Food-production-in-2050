@@ -124,7 +124,7 @@ function showLegend() {
 	legendTitle.innerHTML = "Legend: ";
 
 	var legendColors = document.createElement("div");
-	legendColors.className = "legend_colors";
+	legendColors.id = "legend_colors";
 	legendColors.style.backgroundImage = "linear-gradient(to right,"+color1[previousCheck]+","+color2[previousCheck]+","+color3[previousCheck]+","+color4[previousCheck]+","+color5[previousCheck]+","+color6[previousCheck]+")";
 
 	var legendValues = document.createElement("div");
@@ -148,6 +148,11 @@ function showLegend() {
 
 	var elem = document.getElementById('map');
 	elem.appendChild(legendDiv);
+}
+
+function updateLegend() {
+	var legendColors = document.getElementById("legend_colors");
+	legendColors.style.backgroundImage = "linear-gradient(to right,"+color1[previousCheck]+","+color2[previousCheck]+","+color3[previousCheck]+","+color4[previousCheck]+","+color5[previousCheck]+","+color6[previousCheck]+")";
 }
 
 function showLoading() {
@@ -688,7 +693,8 @@ for(let i=0; i<checkboxes.length;i++){
       		mapLayer(checkboxes[i].value);
       		previousCheck = checkboxes[i].value;
       		// Sow legend
-			showLegend();
+			//showLegend();
+			updateLegend();
       		addTitle();
       } 
     };
