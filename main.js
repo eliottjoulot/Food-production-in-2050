@@ -39,12 +39,12 @@ var selectedOPTION;	// The scenario choosen
 var map;			// The map where the data is displayed on
 
 // Colors used for data
-var color1 = "rgba(255,255,123,0.1)";
-var color2 = "rgba(200,255,102,0.6)";
-var color3 = "rgba(177,255,20,0.6)";
-var color4 = "rgba(123,255,47,0.6)";
-var color5 = "rgba(100,230,50,0.6)";
-var color6 = "rgba(0,100,0,0.6)";
+var color1 = {'calories': "rgba(255,255,123,0.1)", 'yields': "rgba(255,255,123,0.1)", "population": "rgba(255,255,123,0.1)"};
+var color2 = {'calories': "rgba(200,255,102,0.6)", 'yields': "rgba(200,255,102,0.6)", "population": "rgba(255,200,102,0.6)"};
+var color3 = {'calories': "rgba(177,255,20,0.6)",  'yields': "rgba(177,255,20,0.6)",  "population": "rgba(255,177,20,0.6)"};
+var color4 = {'calories': "rgba(123,255,47,0.6)",  'yields': "rgba(123,255,47,0.6)",  "population": "rgba(255,123,47,0.6)"};
+var color5 = {'calories': "rgba(100,230,50,0.6)",  'yields': "rgba(100,230,50,0.6)",  "population": "rgba(230,50,50,0.6)"};
+var color6 = {'calories': "rgba(0,100,0,0.6)",	   'yields': "rgba(0,100,0,0.6)", 	  "population": "rgba(127,0,0,0.7)"};
 
 const dataValues = {};
 	
@@ -125,7 +125,7 @@ function showLegend() {
 
 	var legendColors = document.createElement("div");
 	legendColors.className = "legend_colors";
-	legendColors.style.backgroundImage = "linear-gradient(to right,"+color1+","+color2+","+color3+","+color4+","+color5+","+color6+")";
+	legendColors.style.backgroundImage = "linear-gradient(to right,"+color1[previousCheck]+","+color2[previousCheck]+","+color3[previousCheck]+","+color4[previousCheck]+","+color5[previousCheck]+","+color6[previousCheck]+")";
 
 	var legendValues = document.createElement("div");
 	legendValues.className = "legend_values";
@@ -320,12 +320,12 @@ function mapLayer(subData) {
 				"interpolate",
 				["linear"],
 				["heatmap-density"],
-				0, color1,
-				0.2, color2,
-				0.4, color3,
-				0.6, color4,
-				0.8, color5,
-				1, color6
+				0, color1[subData],
+				0.2, color2[subData],
+				0.4, color3[subData],
+				0.6, color4[subData],
+				0.8, color5[subData],
+				1, color6[subData]
 			],
 			// Adjust the heatmap radius by zoom level
 			"heatmap-radius": [
@@ -412,9 +412,9 @@ function mapLayer(subData) {
                 "interpolate",
                 ["linear"],
                 ["get", subData],
-                dataValues[subData + 'Min'], color1,
-                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, color4,
-                dataValues[subData + 'Max'], color6
+                dataValues[subData + 'Min'], color1[subData],
+                (dataValues[subData + 'Min'] + dataValues[subData + 'Max'])/2, color4[subData],
+                dataValues[subData + 'Max'], color6[subData]
             ],
             // Transition from heatmap to circle layer by zoom level
             "circle-opacity": [
@@ -597,8 +597,10 @@ function onSSPchanged(i) {
 		mapRemove();
 		// Add the new source
 		mapSource();
+
 		// Keep the same parameter for the previous model (ie : population, temperature, ..)
 		mapLayer(previousCheck);
+
 		// Hidd the loading gif 
 		hideLoading();
 		//Update the info placeholder below the map
@@ -685,6 +687,8 @@ for(let i=0; i<checkboxes.length;i++){
       		mapRemoveLayerOnly();
       		mapLayer(checkboxes[i].value);
       		previousCheck = checkboxes[i].value;
+      		// Sow legend
+			showLegend();
       		addTitle();
       } 
     };
