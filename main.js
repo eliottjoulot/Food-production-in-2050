@@ -249,7 +249,6 @@ function mapSource() {
 	let dataSelect = selectedSSP;
 	console.log('New scenario: ' + selectedSSP.toLowerCase());
 
-
 	// Fly to interesting location according to the selected model
 	map.flyTo({
         center: [85, 20],
