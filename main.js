@@ -252,26 +252,10 @@ function mapSource() {
 	let dataSelect = selectedSSP;
 	console.log('New scenario: ' + selectedSSP);
 
-	/*var data = "";
-	if(isDataCache()) {
-		console.log("Loading the data in cache");
-		//_data = sessionStorage.getItem(selectedSSP.toLowerCase()+"_data", "_"+selectedSSP.toLowerCase()+".geojson" );
-		
-		//var retrievedObject = sessionStorage.getItem(selectedSSP.toLowerCase()+"_data");
-		//console.log("l,oik,  " + retrievedObject);
-		//_data data = JSON.parse(retrievedObject);
-		
-	}
-	else {
-		console.log("Data not in cache");
-		_data = "_" + dataSelect.toLowerCase() + ".geojson"
-	}*/
-	
-
 	// Add source
 	map.addSource("earthquakes", {
 		type: "geojson",
-		data: "_" + dataSelect + ".geojson",
+		data: "_" + dataSelect.toLowerCase() + ".geojson",
 		//data: _data,
 		cluster: false, // Set to true to sow clusters of points
 		clusterMaxZoom: 6, // Max zoom to cluster points on
