@@ -236,6 +236,16 @@ POPUP
 	font-size: 14px;
 }
 
+.story {
+	width: 600px;
+	margin-left: 28%;
+}
+
+.figure_legend {
+	margin-left: 35%;
+	position: inherit;
+}
+
 body.modal-open .page_container{
     -webkit-filter: blur(6px);
     -moz-filter: blur(6px);
